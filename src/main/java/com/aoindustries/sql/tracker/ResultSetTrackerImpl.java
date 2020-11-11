@@ -24,6 +24,7 @@ package com.aoindustries.sql.tracker;
 
 import com.aoindustries.lang.Throwables;
 import com.aoindustries.sql.wrapper.ResultSetWrapperImpl;
+import com.aoindustries.sql.wrapper.StatementWrapperImpl;
 import java.io.InputStream;
 import java.io.Reader;
 import java.sql.Array;
@@ -50,7 +51,7 @@ import java.util.Map;
  */
 public class ResultSetTrackerImpl extends ResultSetWrapperImpl implements ResultSetTracker {
 
-	public ResultSetTrackerImpl(ConnectionTrackerImpl connectionTracker, StatementTrackerImpl stmtTracker, ResultSet wrapped) {
+	public ResultSetTrackerImpl(ConnectionTrackerImpl connectionTracker, StatementWrapperImpl stmtTracker, ResultSet wrapped) {
 		super(connectionTracker, stmtTracker, wrapped);
 	}
 

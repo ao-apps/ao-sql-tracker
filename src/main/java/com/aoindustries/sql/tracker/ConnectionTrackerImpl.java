@@ -554,7 +554,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	@Override
 	protected ResultSetTrackerImpl newResultSetWrapper(StatementWrapperImpl stmtWrapper, ResultSet results) {
 		return newIfAbsent(trackedResultSets, results, (conn, k) ->
-			new ResultSetTrackerImpl(conn, (StatementTrackerImpl)stmtWrapper, k));
+			new ResultSetTrackerImpl(conn, stmtWrapper, k));
 	}
 
 	@Override
