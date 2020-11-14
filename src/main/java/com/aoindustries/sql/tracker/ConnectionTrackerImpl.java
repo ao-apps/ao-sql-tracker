@@ -493,7 +493,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	@Override
 	protected ArrayTrackerImpl newArrayWrapper(StatementWrapperImpl stmtWrapper, Array array) {
 		return newIfAbsent(trackedArrays, array, (conn, k) ->
-			new ArrayTrackerImpl(conn, (StatementTrackerImpl)stmtWrapper, k));
+			new ArrayTrackerImpl(conn, stmtWrapper, k));
 	}
 
 	@Override

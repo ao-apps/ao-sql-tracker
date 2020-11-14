@@ -24,6 +24,7 @@ package com.aoindustries.sql.tracker;
 
 import com.aoindustries.lang.Throwables;
 import com.aoindustries.sql.wrapper.ArrayWrapperImpl;
+import com.aoindustries.sql.wrapper.StatementWrapperImpl;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,8 +42,8 @@ import java.util.Map;
  */
 public class ArrayTrackerImpl extends ArrayWrapperImpl implements ArrayTracker {
 
-	public ArrayTrackerImpl(ConnectionTrackerImpl connectionTracker, StatementTrackerImpl stmtTracker, Array wrapped) {
-		super(connectionTracker, stmtTracker, wrapped);
+	public ArrayTrackerImpl(ConnectionTrackerImpl connectionTracker, StatementWrapperImpl stmtWrapper, Array wrapped) {
+		super(connectionTracker, stmtWrapper, wrapped);
 	}
 
 	private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
