@@ -23,9 +23,9 @@
 package com.aoindustries.sql.tracker;
 
 import com.aoindustries.collections.IdentityKey;
-import com.aoindustries.collections.wrapper.Converter;
-import com.aoindustries.collections.wrapper.FunctionalConverter;
-import com.aoindustries.collections.wrapper.MapWrapper;
+import com.aoindustries.collections.transformers.FunctionalTransformer;
+import com.aoindustries.collections.transformers.TransformMap;
+import com.aoindustries.collections.transformers.Transformer;
 import com.aoindustries.lang.AutoCloseables;
 import com.aoindustries.lang.Runnables;
 import com.aoindustries.lang.Throwables;
@@ -117,15 +117,15 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	 */
 	@SuppressWarnings("unchecked")
 	private final Map<Savepoint,SavepointTrackerImpl> trackedSavepoints = synchronizedMap(
-		MapWrapper.of(
+		TransformMap.of(
 			new LinkedHashMap<>(),
-			new FunctionalConverter<>(
+			new FunctionalTransformer<>(
 				Savepoint.class,
 				(Class<IdentityKey<Savepoint>>)(Class)IdentityKey.class,
 				IdentityKey::of,
 				IdentityKey::getValue
 			),
-			Converter.identity()
+			Transformer.identity()
 		)
 	);
 
