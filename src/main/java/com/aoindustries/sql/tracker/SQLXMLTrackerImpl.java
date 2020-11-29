@@ -36,6 +36,7 @@ import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link SQLXML} for unclosed or unfreed objects.
@@ -43,6 +44,8 @@ import java.util.Map;
  * @author  AO Industries, Inc.
  */
 public class SQLXMLTrackerImpl extends SQLXMLWrapperImpl implements SQLXMLTracker {
+
+	private static final Logger logger = Logger.getLogger(SQLXMLTrackerImpl.class.getName());
 
 	public SQLXMLTrackerImpl(ConnectionTrackerImpl connectionTracker, SQLXML wrapped) {
 		super(connectionTracker, wrapped);
@@ -131,12 +134,10 @@ public class SQLXMLTrackerImpl extends SQLXMLWrapperImpl implements SQLXMLTracke
 	public void free() throws SQLException {
 		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
 		// Close tracked objects
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0,
-			trackedInputStreams,
-			trackedOutputStreams,
-			trackedReaders,
-			trackedWriters
-		);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLXMLTrackerImpl.class, "free()", "trackedInputStreams", trackedInputStreams);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLXMLTrackerImpl.class, "free()", "trackedOutputStreams", trackedOutputStreams);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLXMLTrackerImpl.class, "free()", "trackedReaders", trackedReaders);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLXMLTrackerImpl.class, "free()", "trackedWriters", trackedWriters);
 		try {
 			super.free();
 		} catch(Throwable t) {

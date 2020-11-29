@@ -34,6 +34,7 @@ import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link Blob} for unclosed or unfreed objects.
@@ -41,6 +42,8 @@ import java.util.Map;
  * @author  AO Industries, Inc.
  */
 public class BlobTrackerImpl extends BlobWrapperImpl implements BlobTracker {
+
+	private static final Logger logger = Logger.getLogger(BlobTrackerImpl.class.getName());
 
 	public BlobTrackerImpl(ConnectionTrackerImpl connectionTracker, Blob wrapped) {
 		super(connectionTracker, wrapped);
@@ -95,10 +98,8 @@ public class BlobTrackerImpl extends BlobWrapperImpl implements BlobTracker {
 	public void free() throws SQLException {
 		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
 		// Close tracked objects
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0,
-			trackedInputStreams,
-			trackedOutputStreams
-		);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, BlobTrackerImpl.class, "free()", "trackedInputStreams", trackedInputStreams);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, BlobTrackerImpl.class, "free()", "trackedOutputStreams", trackedOutputStreams);
 		try {
 			super.free();
 		} catch(Throwable t) {

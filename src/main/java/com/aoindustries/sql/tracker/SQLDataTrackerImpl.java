@@ -36,6 +36,7 @@ import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link SQLData} for unclosed or unfreed objects.
@@ -43,6 +44,8 @@ import java.util.Map;
  * @author  AO Industries, Inc.
  */
 public class SQLDataTrackerImpl extends SQLDataWrapperImpl implements SQLDataTracker {
+
+	private static final Logger logger = Logger.getLogger(SQLDataTrackerImpl.class.getName());
 
 	public SQLDataTrackerImpl(ConnectionTrackerImpl connectionTracker, SQLData wrapped) {
 		super(connectionTracker, wrapped);
@@ -97,10 +100,8 @@ public class SQLDataTrackerImpl extends SQLDataWrapperImpl implements SQLDataTra
 	public void close() throws SQLException {
 		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
 		// Close tracked objects
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0,
-			trackedSQLInputs,
-			trackedSQLOutputs
-		);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLDataTrackerImpl.class, "close()", "trackedSQLInputs", trackedSQLInputs);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLDataTrackerImpl.class, "close()", "trackedSQLOutputs", trackedSQLOutputs);
 		try {
 			super.close();
 		} catch(Throwable t) {

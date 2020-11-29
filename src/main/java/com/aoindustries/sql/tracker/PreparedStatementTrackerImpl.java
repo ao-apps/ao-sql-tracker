@@ -35,6 +35,7 @@ import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link PreparedStatement} for unclosed or unfreed objects.
@@ -42,6 +43,8 @@ import java.util.Map;
  * @author  AO Industries, Inc.
  */
 public class PreparedStatementTrackerImpl extends PreparedStatementWrapperImpl implements PreparedStatementTracker {
+
+	private static final Logger logger = Logger.getLogger(PreparedStatementTrackerImpl.class.getName());
 
 	public PreparedStatementTrackerImpl(ConnectionTrackerImpl connectionTracker, PreparedStatement wrapped) {
 		super(connectionTracker, wrapped);
@@ -113,13 +116,11 @@ public class PreparedStatementTrackerImpl extends PreparedStatementWrapperImpl i
 	public void close() throws SQLException {
 		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
 		// Close tracked objects
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0,
-			// Statement
-			trackedResultSets,
-			// PreparedStatement
-			trackedParameterMetaDatas,
-			trackedResultSetMetaDatas
-		);
+		// Statement
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, PreparedStatementTrackerImpl.class, "close()", "trackedResultSets", trackedResultSets);
+		// PreparedStatement
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, PreparedStatementTrackerImpl.class, "close()", "trackedParameterMetaDatas", trackedParameterMetaDatas);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, PreparedStatementTrackerImpl.class, "close()", "trackedResultSetMetaDatas", trackedResultSetMetaDatas);
 		try {
 			super.close();
 		} catch(Throwable t) {

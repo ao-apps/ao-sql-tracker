@@ -43,6 +43,7 @@ import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link ResultSet} for unclosed or unfreed objects.
@@ -50,6 +51,8 @@ import java.util.Map;
  * @author  AO Industries, Inc.
  */
 public class ResultSetTrackerImpl extends ResultSetWrapperImpl implements ResultSetTracker {
+
+	private static final Logger logger = Logger.getLogger(ResultSetTrackerImpl.class.getName());
 
 	public ResultSetTrackerImpl(ConnectionTrackerImpl connectionTracker, StatementWrapperImpl stmtTracker, ResultSet wrapped) {
 		super(connectionTracker, stmtTracker, wrapped);
@@ -232,18 +235,16 @@ public class ResultSetTrackerImpl extends ResultSetWrapperImpl implements Result
 	public void close() throws SQLException {
 		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
 		// Close tracked objects
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0,
-			trackedArrays,
-			trackedBlobs,
-			trackedClobs,
-			trackedInputStreams,
-			trackedNClobs,
-			trackedReaders,
-			trackedRefs,
-			trackedResultSetMetaDatas,
-			trackedRowIds,
-			trackedSQLXMLs
-		);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedArrays", trackedArrays);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedBlobs", trackedBlobs);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedClobs", trackedClobs);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedInputStreams", trackedInputStreams);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedNClobs", trackedNClobs);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedReaders", trackedReaders);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedRefs", trackedRefs);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedResultSetMetaDatas", trackedResultSetMetaDatas);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedRowIds", trackedRowIds);
+		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, ResultSetTrackerImpl.class, "close()", "trackedSQLXMLs", trackedSQLXMLs);
 		try {
 			super.close();
 		} catch(Throwable t) {

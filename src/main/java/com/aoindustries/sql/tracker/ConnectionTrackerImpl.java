@@ -69,6 +69,8 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link Connection} for unclosed or unfreed objects.
@@ -76,6 +78,8 @@ import java.util.function.Function;
  * @author  AO Industries, Inc.
  */
 public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements ConnectionTracker {
+
+	private static final Logger logger = Logger.getLogger(ConnectionTrackerImpl.class.getName());
 
 	public ConnectionTrackerImpl(DriverTracker driver, Connection wrapped) {
 		super(driver, wrapped);
@@ -280,31 +284,44 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 		return AutoCloseables.closeAndCatch(t0, closeMes);
 	}
 
+	/**
+	 * Closes all tracked objects in the given map.  Synchronizes on access to the map, and clears the map before
+	 * closing the tracked objects.
+	 * <p>
+	 * When non-zero number of objects to close, logs the number at level {@link Level#FINE} and a list of objects at
+	 * level {@link Level#FINER}.
+	 * </p>
+	 *
+	 * @return  The result of all throwables merged via {@link Throwables#addSuppressed(java.lang.Throwable, java.lang.Throwable)}
+	 */
 	@SuppressWarnings("unchecked")
-	static Throwable clearCloseAndCatch(Throwable t0, Map<?,? extends AutoCloseable> ... maps) {
-		List<AutoCloseable> closeMes = null;
-		for(Map<?,? extends AutoCloseable> map : maps) {
-			synchronized(map) {
-				if(closeMes == null) {
-					closeMes = new ArrayList<>(map.values());
-				} else {
-					closeMes.clear();
-					closeMes.addAll(map.values());
-				}
-				map.clear();
+	static Throwable clearCloseAndCatch(Throwable t0, Logger logger, Class<?> sourceClass, String sourceMethod, String field, Map<?,? extends AutoCloseable> tracked) {
+		List<AutoCloseable> closeMes;
+		synchronized(tracked) {
+			Collection<? extends AutoCloseable> values = tracked.values();
+			if(values.isEmpty()) {
+				// Short-cut nothing to do
+				return t0;
 			}
-			t0 = AutoCloseables.closeAndCatch(t0, closeMes);
+			closeMes = new ArrayList<>(values);
+			tracked.clear();
+		}
+		int size = closeMes.size();
+		assert size > 0;
+		if(logger.isLoggable(Level.FINE)) {
+			String sourceClassName = sourceClass.getName();
+			logger.logp(Level.FINE, sourceClassName, sourceMethod, field + ": Closing " + size + " tracked " + (size == 1 ? "object" : "objects"));
+			if(logger.isLoggable(Level.FINER)) {
+				for(int i = 0; i < size; i++) {
+					AutoCloseable closeMe = closeMes.get(i);
+					logger.logp(Level.FINER, sourceClassName, sourceMethod, field + '[' + i + "]: Closing " + closeMe);
+					t0 = AutoCloseables.closeAndCatch(t0, closeMe);
+				}
+			} else {
+				t0 = AutoCloseables.closeAndCatch(t0, closeMes);
+			}
 		}
 		return t0;
-	}
-
-	static Throwable clearCloseAndCatch(Map<?,? extends AutoCloseable> map) {
-		return clearCloseAndCatch(null, map);
-	}
-
-	@SuppressWarnings("unchecked")
-	static Throwable clearCloseAndCatch(Map<?,? extends AutoCloseable> ... maps) {
-		return clearCloseAndCatch(null, maps);
 	}
 
 	private static void clear(Map<?,?> map) {
@@ -408,37 +425,35 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	 * {@link #rollback()}.
 	 */
 	@SuppressWarnings("unchecked")
-	protected Throwable closeTracked(Throwable t0) {
-		// TODO: Logging FINE with count, FINER with each object
-		return clearCloseAndCatch(t0,
-			// Streams
-			trackedInputStreams,
-			trackedOutputStreams,
-			trackedReaders,
-			trackedWriters,
-			// Types
-			trackedArrays,
-			trackedBlobs,
-			trackedClobs,
-			trackedNClobs,
-			trackedRefs,
-			trackedRowIds,
-			trackedSQLXMLs,
-			trackedStructs,
-			// SQLData
-			trackedSQLDatas,
-			trackedSQLInputs,
-			trackedSQLOutputs,
-			// Meta datas
-			trackedDatabaseMetaDatas,
-			trackedParameterMetaDatas,
-			trackedResultSetMetaDatas,
-			// Statements and results
-			trackedResultSets,
-			trackedCallableStatements,
-			trackedPreparedStatements,
-			trackedStatements
-		);
+	protected Throwable closeTracked(Throwable t0, String sourceMethod) {
+		// Streams
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedInputStreams", trackedInputStreams);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedOutputStreams", trackedOutputStreams);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedReaders", trackedReaders);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedWriters", trackedWriters);
+		// Types
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedArrays", trackedArrays);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedBlobs", trackedBlobs);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedClobs", trackedClobs);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedNClobs", trackedNClobs);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedRefs", trackedRefs);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedRowIds", trackedRowIds);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedSQLXMLs", trackedSQLXMLs);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedStructs", trackedStructs);
+		// SQLData
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedSQLDatas", trackedSQLDatas);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedSQLInputs", trackedSQLInputs);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedSQLOutputs", trackedSQLOutputs);
+		// Meta datas
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedDatabaseMetaDatas", trackedDatabaseMetaDatas);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedParameterMetaDatas", trackedParameterMetaDatas);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedResultSetMetaDatas", trackedResultSetMetaDatas);
+		// Statements and results
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedResultSets", trackedResultSets);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedCallableStatements", trackedCallableStatements);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedPreparedStatements", trackedPreparedStatements);
+		t0 = clearCloseAndCatch(t0, logger, ConnectionTrackerImpl.class, sourceMethod, "trackedStatements", trackedStatements);
+		return t0;
 	}
 
 	/**
@@ -666,7 +681,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	 * This default implementation calls {@link #doClose()}.
 	 * </p>
 	 *
-	 * @see  #closeTracked(java.lang.Throwable)
+	 * @see  #closeTracked(java.lang.Throwable, java.lang.String)
 	 * @see  #doClose()
 	 */
 	@Override
@@ -674,7 +689,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	public void close() throws SQLException {
 		Throwable t0 = clearRunAndCatch(onCloseHandlers);
 		// Close tracked objects
-		t0 = closeTracked(t0);
+		t0 = closeTracked(t0, "close()");
 		// Rollback any transaction in-progress and put back in auto-commit mode
 		try {
 			if(!isClosed() && !getAutoCommit()) {
