@@ -63,8 +63,6 @@ public class SavepointTrackerImpl extends SavepointWrapperImpl implements Savepo
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ConnectionTrackerImpl#releaseSavepoint(java.sql.Savepoint)
 	 */
 	@Override

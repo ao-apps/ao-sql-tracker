@@ -70,8 +70,6 @@ public class StatementTrackerImpl extends StatementWrapperImpl implements Statem
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ResultSetTrackerImpl#close()
 	 */
 	@Override

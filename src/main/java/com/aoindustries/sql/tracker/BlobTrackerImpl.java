@@ -87,8 +87,6 @@ public class BlobTrackerImpl extends BlobWrapperImpl implements BlobTracker {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  InputStreamTracker#close()
 	 * @see  OutputStreamTracker#close()
 	 */

@@ -121,8 +121,6 @@ public class ClobTrackerImpl extends ClobWrapperImpl implements ClobTracker {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  InputStreamTracker#close()
 	 * @see  OutputStreamTracker#close()
 	 * @see  ReaderTracker#close()

@@ -216,8 +216,6 @@ public class ResultSetTrackerImpl extends ResultSetWrapperImpl implements Result
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ArrayTrackerImpl#close()
 	 * @see  BlobTrackerImpl#close()
 	 * @see  ClobTrackerImpl#close()

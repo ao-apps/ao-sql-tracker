@@ -69,8 +69,6 @@ public class DatabaseMetaDataTrackerImpl extends DatabaseMetaDataWrapperImpl imp
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ResultSetTrackerImpl#close()
 	 */
 	@Override

@@ -121,8 +121,6 @@ public class SQLXMLTrackerImpl extends SQLXMLWrapperImpl implements SQLXMLTracke
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  InputStreamTracker#close()
 	 * @see  OutputStreamTracker#close()
 	 * @see  ReaderTracker#close()

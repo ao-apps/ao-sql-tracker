@@ -199,8 +199,6 @@ public class SQLInputTrackerImpl extends SQLInputWrapperImpl implements SQLInput
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ArrayTrackerImpl#close()
 	 * @see  BlobTrackerImpl#close()
 	 * @see  ClobTrackerImpl#close()

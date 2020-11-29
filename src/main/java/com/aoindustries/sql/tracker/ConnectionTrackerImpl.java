@@ -608,8 +608,6 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  SavepointTrackerImpl#onRelease()
 	 */
 	@Override
@@ -629,8 +627,6 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  SavepointTrackerImpl#onRelease()
 	 */
 	@Override
@@ -648,8 +644,6 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  SavepointTrackerImpl#onRelease()
 	 */
 	@Override
@@ -701,8 +695,6 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  SavepointTrackerImpl#onRelease()
 	 */
 	@Override
@@ -743,8 +735,6 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  SavepointTrackerImpl#close()
 	 * @see  SavepointTrackerImpl#onRelease()
 	 */

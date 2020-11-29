@@ -233,8 +233,6 @@ public class CallableStatementTrackerImpl extends CallableStatementWrapperImpl i
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ResultSetTrackerImpl#close()
 	 *
 	 * @see  ParameterMetaDataTrackerImpl#close()

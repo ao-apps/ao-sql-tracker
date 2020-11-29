@@ -103,8 +103,6 @@ public class PreparedStatementTrackerImpl extends PreparedStatementWrapperImpl i
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ResultSetTrackerImpl#close()
 	 *
 	 * @see  ParameterMetaDataTrackerImpl#close()

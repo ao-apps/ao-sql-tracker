@@ -121,8 +121,6 @@ public class NClobTrackerImpl extends NClobWrapperImpl implements NClobTracker {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  InputStreamTracker#close()
 	 * @see  OutputStreamTracker#close()
 	 * @see  ReaderTracker#close()

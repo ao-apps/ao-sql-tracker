@@ -70,8 +70,6 @@ public class ArrayTrackerImpl extends ArrayWrapperImpl implements ArrayTracker {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  ResultSetTrackerImpl#close()
 	 */
 	@Override

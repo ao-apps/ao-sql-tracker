@@ -89,8 +89,6 @@ public class SQLDataTrackerImpl extends SQLDataWrapperImpl implements SQLDataTra
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see  SQLInputTrackerImpl#close()
 	 * @see  SQLOutputTrackerImpl#close()
 	 */
