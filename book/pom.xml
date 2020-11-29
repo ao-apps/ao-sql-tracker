@@ -29,7 +29,7 @@ along with ao-sql-tracker.  If not, see <http://www.gnu.org/licenses />.
 		<relativePath>../../ao-oss-parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoindustries</groupId><artifactId>ao-sql-tracker-book</artifactId><version>1.0.0-SNAPSHOT</version>
+	<groupId>com.aoindustries</groupId><artifactId>ao-sql-tracker-book</artifactId><version>1.0.0</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -51,7 +51,7 @@ along with ao-sql-tracker.  If not, see <http://www.gnu.org/licenses />.
 		<connection>scm:git:git://github.com/aoindustries/ao-sql-tracker.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/ao-sql-tracker.git</developerConnection>
 		<url>https://github.com/aoindustries/ao-sql-tracker</url>
-		<tag>HEAD</tag>
+		<tag>ao-sql-tracker-book-1.0.0</tag>
 	</scm>
 
 	<issueManagement>
