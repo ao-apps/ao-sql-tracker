@@ -35,7 +35,7 @@ along with ao-sql-tracker.  If not, see <http://www.gnu.org/licenses />.
 		<ao:forward page="index.html" />
 	</c:if>
 	<core:page
-		title="@{documented.name} @{com.aoindustries:ao-sql-tracker:pom.version} API Docs"
+		title="@{documented.name} ${ao:getProjectVersion('./', 'com.aoindustries', 'ao-sql-tracker', '¿@{project.version}?')} API Docs"
 		shortTitle="API Docs"
 		datePublished="2020-11-02T21:26:13-06:00"
 		dateModified="${ao:getLastModified('index.html')}"
