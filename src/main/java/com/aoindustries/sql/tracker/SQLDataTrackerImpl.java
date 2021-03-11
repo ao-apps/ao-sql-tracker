@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -58,18 +58,18 @@ public class SQLDataTrackerImpl extends SQLDataWrapperImpl implements SQLDataTra
 		onCloseHandlers.add(onCloseHandler);
 	}
 
-	private final Map<SQLInput,SQLInputTrackerImpl> trackedSQLInputs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<SQLOutput,SQLOutputTrackerImpl> trackedSQLOutputs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<SQLInput, SQLInputTrackerImpl> trackedSQLInputs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<SQLOutput, SQLOutputTrackerImpl> trackedSQLOutputs = synchronizedMap(new IdentityHashMap<>());
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLInput,SQLInputTrackerImpl> getTrackedSQLInputs() {
+	final public Map<SQLInput, SQLInputTrackerImpl> getTrackedSQLInputs() {
 		return trackedSQLInputs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLOutput,SQLOutputTrackerImpl> getTrackedSQLOutputs() {
+	final public Map<SQLOutput, SQLOutputTrackerImpl> getTrackedSQLOutputs() {
 		return trackedSQLOutputs;
 	}
 

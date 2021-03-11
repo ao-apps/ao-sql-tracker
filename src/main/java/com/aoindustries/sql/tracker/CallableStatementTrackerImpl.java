@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -66,83 +66,83 @@ public class CallableStatementTrackerImpl extends CallableStatementWrapperImpl i
 	}
 
 	// Statement
-	private final Map<ResultSet,ResultSetTrackerImpl> trackedResultSets = synchronizedMap(new IdentityHashMap<>());
+	private final Map<ResultSet, ResultSetTrackerImpl> trackedResultSets = synchronizedMap(new IdentityHashMap<>());
 	// PreparedStatement
-	private final Map<ParameterMetaData,ParameterMetaDataTrackerImpl> trackedParameterMetaDatas = synchronizedMap(new IdentityHashMap<>());
-	private final Map<ResultSetMetaData,ResultSetMetaDataTrackerImpl> trackedResultSetMetaDatas = synchronizedMap(new IdentityHashMap<>());
+	private final Map<ParameterMetaData, ParameterMetaDataTrackerImpl> trackedParameterMetaDatas = synchronizedMap(new IdentityHashMap<>());
+	private final Map<ResultSetMetaData, ResultSetMetaDataTrackerImpl> trackedResultSetMetaDatas = synchronizedMap(new IdentityHashMap<>());
 	// CallableStatement
-	private final Map<Array,ArrayTrackerImpl> trackedArrays = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Blob,BlobTrackerImpl> trackedBlobs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Clob,ClobTrackerImpl> trackedClobs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<NClob,NClobTrackerImpl> trackedNClobs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Reader,ReaderTracker> trackedReaders = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Ref,RefTrackerImpl> trackedRefs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<RowId,RowIdTrackerImpl> trackedRowIds = synchronizedMap(new IdentityHashMap<>());
-	private final Map<SQLXML,SQLXMLTrackerImpl> trackedSQLXMLs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Array, ArrayTrackerImpl> trackedArrays = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Blob, BlobTrackerImpl> trackedBlobs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Clob, ClobTrackerImpl> trackedClobs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<NClob, NClobTrackerImpl> trackedNClobs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Reader, ReaderTracker> trackedReaders = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Ref, RefTrackerImpl> trackedRefs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<RowId, RowIdTrackerImpl> trackedRowIds = synchronizedMap(new IdentityHashMap<>());
+	private final Map<SQLXML, SQLXMLTrackerImpl> trackedSQLXMLs = synchronizedMap(new IdentityHashMap<>());
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ResultSet,ResultSetTrackerImpl> getTrackedResultSets() {
+	final public Map<ResultSet, ResultSetTrackerImpl> getTrackedResultSets() {
 		return trackedResultSets;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ParameterMetaData,ParameterMetaDataTrackerImpl> getTrackedParameterMetaDatas() {
+	final public Map<ParameterMetaData, ParameterMetaDataTrackerImpl> getTrackedParameterMetaDatas() {
 		return trackedParameterMetaDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ResultSetMetaData,ResultSetMetaDataTrackerImpl> getTrackedResultSetMetaDatas() {
+	final public Map<ResultSetMetaData, ResultSetMetaDataTrackerImpl> getTrackedResultSetMetaDatas() {
 		return trackedResultSetMetaDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Array,ArrayTrackerImpl> getTrackedArrays() {
+	final public Map<Array, ArrayTrackerImpl> getTrackedArrays() {
 		return trackedArrays;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Blob,BlobTrackerImpl> getTrackedBlobs() {
+	final public Map<Blob, BlobTrackerImpl> getTrackedBlobs() {
 		return trackedBlobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Clob,ClobTrackerImpl> getTrackedClobs() {
+	final public Map<Clob, ClobTrackerImpl> getTrackedClobs() {
 		return trackedClobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<NClob,NClobTrackerImpl> getTrackedNClobs() {
+	final public Map<NClob, NClobTrackerImpl> getTrackedNClobs() {
 		return trackedNClobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Reader,ReaderTracker> getTrackedReaders() {
+	final public Map<Reader, ReaderTracker> getTrackedReaders() {
 		return trackedReaders;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Ref,RefTrackerImpl> getTrackedRefs() {
+	final public Map<Ref, RefTrackerImpl> getTrackedRefs() {
 		return trackedRefs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<RowId,RowIdTrackerImpl> getTrackedRowIds() {
+	final public Map<RowId, RowIdTrackerImpl> getTrackedRowIds() {
 		return trackedRowIds;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLXML,SQLXMLTrackerImpl> getTrackedSQLXMLs() {
+	final public Map<SQLXML, SQLXMLTrackerImpl> getTrackedSQLXMLs() {
 		return trackedSQLXMLs;
 	}
 

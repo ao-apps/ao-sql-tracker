@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -55,7 +55,7 @@ public abstract class DriverTracker extends DriverWrapper implements OnCloseHand
 		onCloseHandlers.add(onCloseHandler);
 	}
 
-	private final Map<Connection,ConnectionTrackerImpl> trackedConnections = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Connection, ConnectionTrackerImpl> trackedConnections = synchronizedMap(new IdentityHashMap<>());
 
 	/**
 	 * Gets all the connections that have not yet been closed.
@@ -65,7 +65,7 @@ public abstract class DriverTracker extends DriverWrapper implements OnCloseHand
 	 * @see  ConnectionTrackerImpl#close()
 	 */
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	public final Map<Connection,ConnectionTrackerImpl> getTrackedConnections() {
+	public final Map<Connection, ConnectionTrackerImpl> getTrackedConnections() {
 		return trackedConnections;
 	}
 

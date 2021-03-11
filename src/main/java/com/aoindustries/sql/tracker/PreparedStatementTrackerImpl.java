@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -58,26 +58,26 @@ public class PreparedStatementTrackerImpl extends PreparedStatementWrapperImpl i
 	}
 
 	// Statement
-	private final Map<ResultSet,ResultSetTrackerImpl> trackedResultSets = synchronizedMap(new IdentityHashMap<>());
+	private final Map<ResultSet, ResultSetTrackerImpl> trackedResultSets = synchronizedMap(new IdentityHashMap<>());
 	// PreparedStatement
-	private final Map<ParameterMetaData,ParameterMetaDataTrackerImpl> trackedParameterMetaDatas = synchronizedMap(new IdentityHashMap<>());
-	private final Map<ResultSetMetaData,ResultSetMetaDataTrackerImpl> trackedResultSetMetaDatas = synchronizedMap(new IdentityHashMap<>());
+	private final Map<ParameterMetaData, ParameterMetaDataTrackerImpl> trackedParameterMetaDatas = synchronizedMap(new IdentityHashMap<>());
+	private final Map<ResultSetMetaData, ResultSetMetaDataTrackerImpl> trackedResultSetMetaDatas = synchronizedMap(new IdentityHashMap<>());
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ResultSet,ResultSetTrackerImpl> getTrackedResultSets() {
+	final public Map<ResultSet, ResultSetTrackerImpl> getTrackedResultSets() {
 		return trackedResultSets;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ParameterMetaData,ParameterMetaDataTrackerImpl> getTrackedParameterMetaDatas() {
+	final public Map<ParameterMetaData, ParameterMetaDataTrackerImpl> getTrackedParameterMetaDatas() {
 		return trackedParameterMetaDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ResultSetMetaData,ResultSetMetaDataTrackerImpl> getTrackedResultSetMetaDatas() {
+	final public Map<ResultSetMetaData, ResultSetMetaDataTrackerImpl> getTrackedResultSetMetaDatas() {
 		return trackedResultSetMetaDatas;
 	}
 

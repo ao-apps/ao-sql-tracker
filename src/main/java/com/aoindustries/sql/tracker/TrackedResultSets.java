@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -34,5 +34,5 @@ public interface TrackedResultSets {
 	 *
 	 * @see  ResultSet#close()
 	 */
-	Map<ResultSet,? extends ResultSetTracker> getTrackedResultSets();
+	Map<ResultSet, ? extends ResultSetTracker> getTrackedResultSets();
 }

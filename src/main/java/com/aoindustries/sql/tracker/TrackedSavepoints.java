@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -35,5 +35,5 @@ public interface TrackedSavepoints {
 	 *
 	 * @see  Connection#releaseSavepoint(java.sql.Savepoint)
 	 */
-	Map<Savepoint,? extends SavepointTracker> getTrackedSavepoints();
+	Map<Savepoint, ? extends SavepointTracker> getTrackedSavepoints();
 }

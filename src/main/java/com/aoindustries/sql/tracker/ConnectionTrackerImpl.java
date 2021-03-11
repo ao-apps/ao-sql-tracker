@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2020  AO Industries, Inc.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -96,31 +96,31 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 		onCloseHandlers.add(onCloseHandler);
 	}
 
-	private final Map<Array,ArrayTrackerImpl> trackedArrays = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Blob,BlobTrackerImpl> trackedBlobs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<CallableStatement,CallableStatementTrackerImpl> trackedCallableStatements = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Clob,ClobTrackerImpl> trackedClobs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<DatabaseMetaData,DatabaseMetaDataTrackerImpl> trackedDatabaseMetaDatas = synchronizedMap(new IdentityHashMap<>());
-	private final Map<InputStream,InputStreamTracker> trackedInputStreams = synchronizedMap(new IdentityHashMap<>());
-	private final Map<NClob,NClobTrackerImpl> trackedNClobs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<OutputStream,OutputStreamTracker> trackedOutputStreams = synchronizedMap(new IdentityHashMap<>());
-	private final Map<ParameterMetaData,ParameterMetaDataTrackerImpl> trackedParameterMetaDatas = synchronizedMap(new IdentityHashMap<>());
-	private final Map<PreparedStatement,PreparedStatementTrackerImpl> trackedPreparedStatements = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Reader,ReaderTracker> trackedReaders = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Ref,RefTrackerImpl> trackedRefs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<ResultSet,ResultSetTrackerImpl> trackedResultSets = synchronizedMap(new IdentityHashMap<>());
-	private final Map<ResultSetMetaData,ResultSetMetaDataTrackerImpl> trackedResultSetMetaDatas = synchronizedMap(new IdentityHashMap<>());
-	private final Map<RowId,RowIdTrackerImpl> trackedRowIds = synchronizedMap(new IdentityHashMap<>());
-	private final Map<SQLData,SQLDataTrackerImpl> trackedSQLDatas = synchronizedMap(new IdentityHashMap<>());
-	private final Map<SQLInput,SQLInputTrackerImpl> trackedSQLInputs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<SQLOutput,SQLOutputTrackerImpl> trackedSQLOutputs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<SQLXML,SQLXMLTrackerImpl> trackedSQLXMLs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Array, ArrayTrackerImpl> trackedArrays = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Blob, BlobTrackerImpl> trackedBlobs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<CallableStatement, CallableStatementTrackerImpl> trackedCallableStatements = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Clob, ClobTrackerImpl> trackedClobs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<DatabaseMetaData, DatabaseMetaDataTrackerImpl> trackedDatabaseMetaDatas = synchronizedMap(new IdentityHashMap<>());
+	private final Map<InputStream, InputStreamTracker> trackedInputStreams = synchronizedMap(new IdentityHashMap<>());
+	private final Map<NClob, NClobTrackerImpl> trackedNClobs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<OutputStream, OutputStreamTracker> trackedOutputStreams = synchronizedMap(new IdentityHashMap<>());
+	private final Map<ParameterMetaData, ParameterMetaDataTrackerImpl> trackedParameterMetaDatas = synchronizedMap(new IdentityHashMap<>());
+	private final Map<PreparedStatement, PreparedStatementTrackerImpl> trackedPreparedStatements = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Reader, ReaderTracker> trackedReaders = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Ref, RefTrackerImpl> trackedRefs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<ResultSet, ResultSetTrackerImpl> trackedResultSets = synchronizedMap(new IdentityHashMap<>());
+	private final Map<ResultSetMetaData, ResultSetMetaDataTrackerImpl> trackedResultSetMetaDatas = synchronizedMap(new IdentityHashMap<>());
+	private final Map<RowId, RowIdTrackerImpl> trackedRowIds = synchronizedMap(new IdentityHashMap<>());
+	private final Map<SQLData, SQLDataTrackerImpl> trackedSQLDatas = synchronizedMap(new IdentityHashMap<>());
+	private final Map<SQLInput, SQLInputTrackerImpl> trackedSQLInputs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<SQLOutput, SQLOutputTrackerImpl> trackedSQLOutputs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<SQLXML, SQLXMLTrackerImpl> trackedSQLXMLs = synchronizedMap(new IdentityHashMap<>());
 
 	/**
 	 * Maintains ordering with {@link LinkedHashMap} while using {@link IdentityKey} as a {@linkplain MapWrapper key wrapper}.
 	 */
 	@SuppressWarnings("unchecked")
-	private final Map<Savepoint,SavepointTrackerImpl> trackedSavepoints = synchronizedMap(
+	private final Map<Savepoint, SavepointTrackerImpl> trackedSavepoints = synchronizedMap(
 		TransformMap.of(
 			new LinkedHashMap<>(),
 			new FunctionalTransformer<>(
@@ -133,149 +133,149 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 		)
 	);
 
-	private final Map<Statement,StatementTrackerImpl> trackedStatements = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Struct,StructTrackerImpl> trackedStructs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<Writer,WriterTracker> trackedWriters = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Statement, StatementTrackerImpl> trackedStatements = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Struct, StructTrackerImpl> trackedStructs = synchronizedMap(new IdentityHashMap<>());
+	private final Map<Writer, WriterTracker> trackedWriters = synchronizedMap(new IdentityHashMap<>());
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Array,ArrayTrackerImpl> getTrackedArrays() {
+	final public Map<Array, ArrayTrackerImpl> getTrackedArrays() {
 		return trackedArrays;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Blob,BlobTrackerImpl> getTrackedBlobs() {
+	final public Map<Blob, BlobTrackerImpl> getTrackedBlobs() {
 		return trackedBlobs;
 	}
 
 	@Override
 	final @SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	public Map<CallableStatement,CallableStatementTrackerImpl> getTrackedCallableStatements() {
+	public Map<CallableStatement, CallableStatementTrackerImpl> getTrackedCallableStatements() {
 		return trackedCallableStatements;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Clob,ClobTrackerImpl> getTrackedClobs() {
+	final public Map<Clob, ClobTrackerImpl> getTrackedClobs() {
 		return trackedClobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<DatabaseMetaData,DatabaseMetaDataTrackerImpl> getTrackedDatabaseMetaDatas() {
+	final public Map<DatabaseMetaData, DatabaseMetaDataTrackerImpl> getTrackedDatabaseMetaDatas() {
 		return trackedDatabaseMetaDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<InputStream,InputStreamTracker> getTrackedInputStreams() {
+	final public Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
 		return trackedInputStreams;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<NClob,NClobTrackerImpl> getTrackedNClobs() {
+	final public Map<NClob, NClobTrackerImpl> getTrackedNClobs() {
 		return trackedNClobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<OutputStream,OutputStreamTracker> getTrackedOutputStreams() {
+	final public Map<OutputStream, OutputStreamTracker> getTrackedOutputStreams() {
 		return trackedOutputStreams;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ParameterMetaData,ParameterMetaDataTrackerImpl> getTrackedParameterMetaDatas() {
+	final public Map<ParameterMetaData, ParameterMetaDataTrackerImpl> getTrackedParameterMetaDatas() {
 		return trackedParameterMetaDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<PreparedStatement,PreparedStatementTrackerImpl> getTrackedPreparedStatements() {
+	final public Map<PreparedStatement, PreparedStatementTrackerImpl> getTrackedPreparedStatements() {
 		return trackedPreparedStatements;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Reader,ReaderTracker> getTrackedReaders() {
+	final public Map<Reader, ReaderTracker> getTrackedReaders() {
 		return trackedReaders;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Ref,RefTrackerImpl> getTrackedRefs() {
+	final public Map<Ref, RefTrackerImpl> getTrackedRefs() {
 		return trackedRefs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ResultSet,ResultSetTrackerImpl> getTrackedResultSets() {
+	final public Map<ResultSet, ResultSetTrackerImpl> getTrackedResultSets() {
 		return trackedResultSets;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ResultSetMetaData,ResultSetMetaDataTrackerImpl> getTrackedResultSetMetaDatas() {
+	final public Map<ResultSetMetaData, ResultSetMetaDataTrackerImpl> getTrackedResultSetMetaDatas() {
 		return trackedResultSetMetaDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<RowId,RowIdTrackerImpl> getTrackedRowIds() {
+	final public Map<RowId, RowIdTrackerImpl> getTrackedRowIds() {
 		return trackedRowIds;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLData,SQLDataTrackerImpl> getTrackedSQLDatas() {
+	final public Map<SQLData, SQLDataTrackerImpl> getTrackedSQLDatas() {
 		return trackedSQLDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLInput,SQLInputTrackerImpl> getTrackedSQLInputs() {
+	final public Map<SQLInput, SQLInputTrackerImpl> getTrackedSQLInputs() {
 		return trackedSQLInputs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLOutput,SQLOutputTrackerImpl> getTrackedSQLOutputs() {
+	final public Map<SQLOutput, SQLOutputTrackerImpl> getTrackedSQLOutputs() {
 		return trackedSQLOutputs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLXML,SQLXMLTrackerImpl> getTrackedSQLXMLs() {
+	final public Map<SQLXML, SQLXMLTrackerImpl> getTrackedSQLXMLs() {
 		return trackedSQLXMLs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Savepoint,SavepointTrackerImpl> getTrackedSavepoints() {
+	final public Map<Savepoint, SavepointTrackerImpl> getTrackedSavepoints() {
 		return trackedSavepoints;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Statement,StatementTrackerImpl> getTrackedStatements() {
+	final public Map<Statement, StatementTrackerImpl> getTrackedStatements() {
 		return trackedStatements;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Struct,StructTrackerImpl> getTrackedStructs() {
+	final public Map<Struct, StructTrackerImpl> getTrackedStructs() {
 		return trackedStructs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Writer,WriterTracker> getTrackedWriters() {
+	final public Map<Writer, WriterTracker> getTrackedWriters() {
 		return trackedWriters;
 	}
 
-	static Throwable clearCloseAndCatch(Throwable t0, Map<?,? extends AutoCloseable> map) {
+	static Throwable clearCloseAndCatch(Throwable t0, Map<?, ? extends AutoCloseable> map) {
 		List<AutoCloseable> closeMes;
 		synchronized(map) {
 			closeMes = new ArrayList<>(map.values());
@@ -295,7 +295,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	 * @return  The result of all throwables merged via {@link Throwables#addSuppressed(java.lang.Throwable, java.lang.Throwable)}
 	 */
 	@SuppressWarnings("unchecked")
-	static Throwable clearCloseAndCatch(Throwable t0, Logger logger, Class<?> sourceClass, String sourceMethod, String field, Map<?,? extends AutoCloseable> tracked) {
+	static Throwable clearCloseAndCatch(Throwable t0, Logger logger, Class<?> sourceClass, String sourceMethod, String field, Map<?, ? extends AutoCloseable> tracked) {
 		List<AutoCloseable> closeMes;
 		synchronized(tracked) {
 			Collection<? extends AutoCloseable> values = tracked.values();
@@ -324,7 +324,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 		return t0;
 	}
 
-	private static void clear(Map<?,?> map) {
+	private static void clear(Map<?, ?> map) {
 		map.clear();
 	}
 
@@ -345,6 +345,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	 * Puts a value into the map when not null and not already in the map.
 	 * When a new map entry is added, an onClose handler is registered that will remove that map entry on close.
 	 *
+	 * @param  <Ex>  An arbitrary exception type that may be thrown
 	 * @param  map          The mapping of tracked objects
 	 * @param  wrapped      The object to find already tracked or retrieve new tracker
 	 * @param  getTracker   Retrieves new tracker when wrapped is not already in the map
@@ -352,12 +353,12 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	 * 
 	 * @return  The value, either obtained from the map or retrieved
 	 */
-	static <K,V extends OnCloseHandler,E extends Throwable> V getIfAbsent(
-		Map<K,V> map,
+	static <K, V extends OnCloseHandler, Ex extends Throwable> V getIfAbsent(
+		Map<K, V> map,
 		K wrapped,
-		CallableE<? extends V,? extends E> getTracker,
-		Function<? super V,? extends K> keyFunction
-	) throws E {
+		CallableE<? extends V, ? extends Ex> getTracker,
+		Function<? super V, ? extends K> keyFunction
+	) throws Ex {
 		if(wrapped != null) {
 			V tracker;
 			synchronized(map) {
@@ -392,8 +393,8 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	 * 
 	 * @return  The value, either obtained from the map or new
 	 */
-	static <T,K,V extends OnCloseHandler> V newIfAbsent(
-		Map<K,V> map,
+	static <T, K, V extends OnCloseHandler> V newIfAbsent(
+		Map<K, V> map,
 		T thisTracker,
 		K wrapped,
 		BiFunction<? super T, ? super K, ? extends V> newTracker
@@ -412,8 +413,8 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	/**
 	 * @see  #newIfAbsent(java.util.Map, java.lang.Object, java.lang.Object, java.util.function.BiFunction)
 	 */
-	private <K,V extends OnCloseHandler> V newIfAbsent(
-		Map<K,V> map,
+	private <K, V extends OnCloseHandler> V newIfAbsent(
+		Map<K, V> map,
 		K wrapped,
 		BiFunction<? super ConnectionTrackerImpl, ? super K, ? extends V> newTracker
 	) {
