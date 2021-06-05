@@ -1,0 +1,42 @@
+/*
+ * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
+ * Copyright (C) 2020, 2021  AO Industries, Inc.
+ *     support@aoindustries.com
+ *     7262 Bull Pen Cir
+ *     Mobile, AL 36695
+ *
+ * This file is part of ao-sql-tracker.
+ *
+ * ao-sql-tracker is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ao-sql-tracker is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ao-sql-tracker.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package com.aoapps.sql.tracker;
+
+import java.sql.Clob;
+import java.sql.NClob;
+import java.util.Map;
+
+public interface TrackedClobs {
+
+	/**
+	 * Gets all the clobs that have not yet been freed.
+	 * This only contains {@link Clob}, please see other method for {@link NClob}.
+	 *
+	 * @return  The mapping from wrapped clob to tracker without any defensive copy.
+	 *
+	 * @see  TrackedNClobs#getTrackedNClobs()
+	 *
+	 * @see  Clob#free()
+	 */
+	Map<Clob, ? extends ClobTracker> getTrackedClobs();
+}
