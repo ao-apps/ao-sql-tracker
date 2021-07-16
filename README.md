@@ -9,6 +9,12 @@
 
 [![Build](https://github.com/aoindustries/ao-sql-tracker/workflows/Build/badge.svg?branch=master)](https://github.com/aoindustries/ao-sql-tracker/actions?query=workflow%3ABuild)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.aoapps/ao-sql-tracker/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.aoapps/ao-sql-tracker)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-sql-tracker&metric=alert_status)](https://sonarcloud.io/dashboard?branch=master&id=com.aoapps%3Aao-sql-tracker)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-sql-tracker&metric=ncloc)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-sql-tracker&metric=ncloc)  
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-sql-tracker&metric=reliability_rating)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-sql-tracker&metric=Reliability)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-sql-tracker&metric=security_rating)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-sql-tracker&metric=Security)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-sql-tracker&metric=sqale_rating)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-sql-tracker&metric=Maintainability)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?branch=master&project=com.aoapps%3Aao-sql-tracker&metric=coverage)](https://sonarcloud.io/component_measures?branch=master&id=com.aoapps%3Aao-sql-tracker&metric=Coverage)
 
 Tracks JDBC API for unclosed or unfreed objects.
 
