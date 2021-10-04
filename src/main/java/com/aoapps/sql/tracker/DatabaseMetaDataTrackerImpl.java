@@ -56,7 +56,7 @@ public class DatabaseMetaDataTrackerImpl extends DatabaseMetaDataWrapperImpl imp
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ResultSet, ResultSetTrackerImpl> getTrackedResultSets() {
+	public final Map<ResultSet, ResultSetTrackerImpl> getTrackedResultSets() {
 		return trackedResultSets;
 	}
 

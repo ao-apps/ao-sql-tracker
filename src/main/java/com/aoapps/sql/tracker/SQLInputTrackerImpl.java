@@ -75,55 +75,55 @@ public class SQLInputTrackerImpl extends SQLInputWrapperImpl implements SQLInput
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Array, ArrayTrackerImpl> getTrackedArrays() {
+	public final Map<Array, ArrayTrackerImpl> getTrackedArrays() {
 		return trackedArrays;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Blob, BlobTrackerImpl> getTrackedBlobs() {
+	public final Map<Blob, BlobTrackerImpl> getTrackedBlobs() {
 		return trackedBlobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Clob, ClobTrackerImpl> getTrackedClobs() {
+	public final Map<Clob, ClobTrackerImpl> getTrackedClobs() {
 		return trackedClobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
+	public final Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
 		return trackedInputStreams;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<NClob, NClobTrackerImpl> getTrackedNClobs() {
+	public final Map<NClob, NClobTrackerImpl> getTrackedNClobs() {
 		return trackedNClobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Reader, ReaderTracker> getTrackedReaders() {
+	public final Map<Reader, ReaderTracker> getTrackedReaders() {
 		return trackedReaders;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Ref, RefTrackerImpl> getTrackedRefs() {
+	public final Map<Ref, RefTrackerImpl> getTrackedRefs() {
 		return trackedRefs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<RowId, RowIdTrackerImpl> getTrackedRowIds() {
+	public final Map<RowId, RowIdTrackerImpl> getTrackedRowIds() {
 		return trackedRowIds;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLXML, SQLXMLTrackerImpl> getTrackedSQLXMLs() {
+	public final Map<SQLXML, SQLXMLTrackerImpl> getTrackedSQLXMLs() {
 		return trackedSQLXMLs;
 	}
 

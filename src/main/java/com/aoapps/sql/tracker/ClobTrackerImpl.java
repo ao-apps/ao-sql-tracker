@@ -65,25 +65,25 @@ public class ClobTrackerImpl extends ClobWrapperImpl implements ClobTracker {
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
+	public final Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
 		return trackedInputStreams;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<OutputStream, OutputStreamTracker> getTrackedOutputStreams() {
+	public final Map<OutputStream, OutputStreamTracker> getTrackedOutputStreams() {
 		return trackedOutputStreams;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Reader, ReaderTracker> getTrackedReaders() {
+	public final Map<Reader, ReaderTracker> getTrackedReaders() {
 		return trackedReaders;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Writer, WriterTracker> getTrackedWriters() {
+	public final Map<Writer, WriterTracker> getTrackedWriters() {
 		return trackedWriters;
 	}
 

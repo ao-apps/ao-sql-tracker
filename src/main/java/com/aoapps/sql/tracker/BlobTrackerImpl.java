@@ -61,13 +61,13 @@ public class BlobTrackerImpl extends BlobWrapperImpl implements BlobTracker {
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
+	public final Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
 		return trackedInputStreams;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<OutputStream, OutputStreamTracker> getTrackedOutputStreams() {
+	public final Map<OutputStream, OutputStreamTracker> getTrackedOutputStreams() {
 		return trackedOutputStreams;
 	}
 

@@ -63,13 +63,13 @@ public class SQLDataTrackerImpl extends SQLDataWrapperImpl implements SQLDataTra
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLInput, SQLInputTrackerImpl> getTrackedSQLInputs() {
+	public final Map<SQLInput, SQLInputTrackerImpl> getTrackedSQLInputs() {
 		return trackedSQLInputs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLOutput, SQLOutputTrackerImpl> getTrackedSQLOutputs() {
+	public final Map<SQLOutput, SQLOutputTrackerImpl> getTrackedSQLOutputs() {
 		return trackedSQLOutputs;
 	}
 

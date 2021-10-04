@@ -56,7 +56,7 @@ public class Driver extends DriverTracker {
 	 *
 	 * @see  DriverManager#registerDriver(java.sql.Driver)
 	 */
-	public synchronized static boolean register() throws SQLException {
+	public static synchronized boolean register() throws SQLException {
 		if(registered == null) {
 			Driver d = new Driver();
 			DriverManager.registerDriver(d, () -> d.onDeregister());
@@ -74,7 +74,7 @@ public class Driver extends DriverTracker {
 	 *
 	 * @see  DriverManager#deregisterDriver(java.sql.Driver)
 	 */
-	public synchronized static boolean deregister() throws SQLException {
+	public static synchronized boolean deregister() throws SQLException {
 		if(registered != null) {
 			DriverManager.deregisterDriver(registered);
 			registered = null;

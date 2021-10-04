@@ -139,13 +139,13 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Array, ArrayTrackerImpl> getTrackedArrays() {
+	public final Map<Array, ArrayTrackerImpl> getTrackedArrays() {
 		return trackedArrays;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Blob, BlobTrackerImpl> getTrackedBlobs() {
+	public final Map<Blob, BlobTrackerImpl> getTrackedBlobs() {
 		return trackedBlobs;
 	}
 
@@ -157,121 +157,121 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Clob, ClobTrackerImpl> getTrackedClobs() {
+	public final Map<Clob, ClobTrackerImpl> getTrackedClobs() {
 		return trackedClobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<DatabaseMetaData, DatabaseMetaDataTrackerImpl> getTrackedDatabaseMetaDatas() {
+	public final Map<DatabaseMetaData, DatabaseMetaDataTrackerImpl> getTrackedDatabaseMetaDatas() {
 		return trackedDatabaseMetaDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
+	public final Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
 		return trackedInputStreams;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<NClob, NClobTrackerImpl> getTrackedNClobs() {
+	public final Map<NClob, NClobTrackerImpl> getTrackedNClobs() {
 		return trackedNClobs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<OutputStream, OutputStreamTracker> getTrackedOutputStreams() {
+	public final Map<OutputStream, OutputStreamTracker> getTrackedOutputStreams() {
 		return trackedOutputStreams;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ParameterMetaData, ParameterMetaDataTrackerImpl> getTrackedParameterMetaDatas() {
+	public final Map<ParameterMetaData, ParameterMetaDataTrackerImpl> getTrackedParameterMetaDatas() {
 		return trackedParameterMetaDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<PreparedStatement, PreparedStatementTrackerImpl> getTrackedPreparedStatements() {
+	public final Map<PreparedStatement, PreparedStatementTrackerImpl> getTrackedPreparedStatements() {
 		return trackedPreparedStatements;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Reader, ReaderTracker> getTrackedReaders() {
+	public final Map<Reader, ReaderTracker> getTrackedReaders() {
 		return trackedReaders;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Ref, RefTrackerImpl> getTrackedRefs() {
+	public final Map<Ref, RefTrackerImpl> getTrackedRefs() {
 		return trackedRefs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ResultSet, ResultSetTrackerImpl> getTrackedResultSets() {
+	public final Map<ResultSet, ResultSetTrackerImpl> getTrackedResultSets() {
 		return trackedResultSets;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<ResultSetMetaData, ResultSetMetaDataTrackerImpl> getTrackedResultSetMetaDatas() {
+	public final Map<ResultSetMetaData, ResultSetMetaDataTrackerImpl> getTrackedResultSetMetaDatas() {
 		return trackedResultSetMetaDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<RowId, RowIdTrackerImpl> getTrackedRowIds() {
+	public final Map<RowId, RowIdTrackerImpl> getTrackedRowIds() {
 		return trackedRowIds;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLData, SQLDataTrackerImpl> getTrackedSQLDatas() {
+	public final Map<SQLData, SQLDataTrackerImpl> getTrackedSQLDatas() {
 		return trackedSQLDatas;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLInput, SQLInputTrackerImpl> getTrackedSQLInputs() {
+	public final Map<SQLInput, SQLInputTrackerImpl> getTrackedSQLInputs() {
 		return trackedSQLInputs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLOutput, SQLOutputTrackerImpl> getTrackedSQLOutputs() {
+	public final Map<SQLOutput, SQLOutputTrackerImpl> getTrackedSQLOutputs() {
 		return trackedSQLOutputs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<SQLXML, SQLXMLTrackerImpl> getTrackedSQLXMLs() {
+	public final Map<SQLXML, SQLXMLTrackerImpl> getTrackedSQLXMLs() {
 		return trackedSQLXMLs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Savepoint, SavepointTrackerImpl> getTrackedSavepoints() {
+	public final Map<Savepoint, SavepointTrackerImpl> getTrackedSavepoints() {
 		return trackedSavepoints;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Statement, StatementTrackerImpl> getTrackedStatements() {
+	public final Map<Statement, StatementTrackerImpl> getTrackedStatements() {
 		return trackedStatements;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Struct, StructTrackerImpl> getTrackedStructs() {
+	public final Map<Struct, StructTrackerImpl> getTrackedStructs() {
 		return trackedStructs;
 	}
 
 	@Override
 	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	final public Map<Writer, WriterTracker> getTrackedWriters() {
+	public final Map<Writer, WriterTracker> getTrackedWriters() {
 		return trackedWriters;
 	}
 
