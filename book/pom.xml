@@ -74,20 +74,20 @@ along with ao-sql-tracker.  If not, see <http://www.gnu.org/licenses />.
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/aoindustries/ao-sql-tracker.git</connection>
-		<developerConnection>scm:git:git@github.com:aoindustries/ao-sql-tracker.git</developerConnection>
-		<url>https://github.com/aoindustries/ao-sql-tracker</url>
+		<connection>scm:git:git://github.com/ao-apps/ao-sql-tracker.git</connection>
+		<developerConnection>scm:git:git@github.com:ao-apps/ao-sql-tracker.git</developerConnection>
+		<url>https://github.com/ao-apps/ao-sql-tracker</url>
 		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/aoindustries/ao-sql-tracker/issues</url>
+		<url>https://github.com/ao-apps/ao-sql-tracker/issues</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>GitHub Actions</system>
-		<url>https://github.com/aoindustries/ao-sql-tracker/actions</url>
+		<url>https://github.com/ao-apps/ao-sql-tracker/actions</url>
 	</ciManagement>
 
 	<repositories>
