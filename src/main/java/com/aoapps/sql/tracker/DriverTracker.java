@@ -46,7 +46,7 @@ public abstract class DriverTracker extends DriverWrapper implements OnCloseHand
 
 	private static final Logger logger = Logger.getLogger(DriverTracker.class.getName());
 
-	public DriverTracker() {}
+	protected DriverTracker() {}
 
 	private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
 
