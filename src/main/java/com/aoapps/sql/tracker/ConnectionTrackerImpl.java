@@ -150,8 +150,8 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	}
 
 	@Override
-	final @SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	public Map<CallableStatement, CallableStatementTrackerImpl> getTrackedCallableStatements() {
+	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
+	public final Map<CallableStatement, CallableStatementTrackerImpl> getTrackedCallableStatements() {
 		return trackedCallableStatements;
 	}
 
@@ -350,7 +350,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	 * @param  wrapped      The object to find already tracked or retrieve new tracker
 	 * @param  getTracker   Retrieves new tracker when wrapped is not already in the map
 	 * @param  keyFunction  Gets the map key to use for the tracker obtained from {@code getTracker}
-	 * 
+	 *
 	 * @return  The value, either obtained from the map or retrieved
 	 */
 	static <K, V extends OnCloseHandler, Ex extends Throwable> V getIfAbsent(
@@ -390,7 +390,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 	 * @param  thisTracker  Passed as the first argument to {@code trackerGenerator}
 	 * @param  wrapped      The object to find already tracked or generate a new tracker
 	 * @param  newTracker   Generates new tracker when wrapped is not already in the map
-	 * 
+	 *
 	 * @return  The value, either obtained from the map or new
 	 */
 	static <T, K, V extends OnCloseHandler> V newIfAbsent(
