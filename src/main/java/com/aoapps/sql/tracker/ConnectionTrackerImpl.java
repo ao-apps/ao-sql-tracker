@@ -125,7 +125,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
 			new LinkedHashMap<>(),
 			new FunctionalTransformer<>(
 				Savepoint.class,
-				(Class<IdentityKey<Savepoint>>)(Class)IdentityKey.class,
+				/*(Class<IdentityKey<Savepoint>>)*/(Class)IdentityKey.class,
 				IdentityKey::of,
 				IdentityKey::getValue
 			),
