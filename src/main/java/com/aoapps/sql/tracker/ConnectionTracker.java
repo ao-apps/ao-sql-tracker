@@ -22,11 +22,11 @@
  */
 package com.aoapps.sql.tracker;
 
+import com.aoapps.sql.wrapper.ConnectionWrapper;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Savepoint;
 import java.util.concurrent.Executor;
-import com.aoapps.sql.wrapper.ConnectionWrapper;
 
 /**
  * Tracks a {@link Connection} for unclosed or unfreed objects.
