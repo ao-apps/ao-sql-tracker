@@ -89,7 +89,9 @@ public class Driver extends DriverTracker {
 	 *
 	 * @see  ServiceLoader
 	 */
-	public Driver() {}
+	public Driver() {
+		// Do nothing
+	}
 
 	@Override
 	public String getUrlPrefix() {
