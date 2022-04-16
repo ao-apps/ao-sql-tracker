@@ -20,6 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-sql-tracker.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 package com.aoapps.sql.tracker;
 
 import com.aoapps.lang.util.PropertiesUtils;
