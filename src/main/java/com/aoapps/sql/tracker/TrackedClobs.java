@@ -29,15 +29,15 @@ import java.util.Map;
 
 public interface TrackedClobs {
 
-	/**
-	 * Gets all the clobs that have not yet been freed.
-	 * This only contains {@link Clob}, please see other method for {@link NClob}.
-	 *
-	 * @return  The mapping from wrapped clob to tracker without any defensive copy.
-	 *
-	 * @see  TrackedNClobs#getTrackedNClobs()
-	 *
-	 * @see  Clob#free()
-	 */
-	Map<Clob, ? extends ClobTracker> getTrackedClobs();
+  /**
+   * Gets all the clobs that have not yet been freed.
+   * This only contains {@link Clob}, please see other method for {@link NClob}.
+   *
+   * @return  The mapping from wrapped clob to tracker without any defensive copy.
+   *
+   * @see  TrackedNClobs#getTrackedNClobs()
+   *
+   * @see  Clob#free()
+   */
+  Map<Clob, ? extends ClobTracker> getTrackedClobs();
 }

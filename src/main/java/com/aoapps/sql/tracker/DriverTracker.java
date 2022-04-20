@@ -45,61 +45,61 @@ import java.util.logging.Logger;
  */
 public abstract class DriverTracker extends DriverWrapper implements OnCloseHandler {
 
-	private static final Logger logger = Logger.getLogger(DriverTracker.class.getName());
+  private static final Logger logger = Logger.getLogger(DriverTracker.class.getName());
 
-	protected DriverTracker() {
-		// Do nothing
-	}
+  protected DriverTracker() {
+    // Do nothing
+  }
 
-	private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
+  private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
 
-	@Override
-	public void addOnClose(Runnable onCloseHandler) {
-		onCloseHandlers.add(onCloseHandler);
-	}
+  @Override
+  public void addOnClose(Runnable onCloseHandler) {
+    onCloseHandlers.add(onCloseHandler);
+  }
 
-	private final Map<Connection, ConnectionTrackerImpl> trackedConnections = synchronizedMap(new IdentityHashMap<>());
+  private final Map<Connection, ConnectionTrackerImpl> trackedConnections = synchronizedMap(new IdentityHashMap<>());
 
-	/**
-	 * Gets all the connections that have not yet been closed.
-	 *
-	 * @return  The mapping from wrapped connection to tracker without any defensive copy.
-	 *
-	 * @see  ConnectionTrackerImpl#close()
-	 */
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	public final Map<Connection, ConnectionTrackerImpl> getTrackedConnections() {
-		return trackedConnections;
-	}
+  /**
+   * Gets all the connections that have not yet been closed.
+   *
+   * @return  The mapping from wrapped connection to tracker without any defensive copy.
+   *
+   * @see  ConnectionTrackerImpl#close()
+   */
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
+  public final Map<Connection, ConnectionTrackerImpl> getTrackedConnections() {
+    return trackedConnections;
+  }
 
-	@Override
-	protected ConnectionTrackerImpl newConnectionWrapper(Connection connection) {
-		return ConnectionTrackerImpl.newIfAbsent(trackedConnections, this, connection, ConnectionTrackerImpl::new);
-	}
+  @Override
+  protected ConnectionTrackerImpl newConnectionWrapper(Connection connection) {
+    return ConnectionTrackerImpl.newIfAbsent(trackedConnections, this, connection, ConnectionTrackerImpl::new);
+  }
 
-	/**
-	 * Calls onClose handlers, closes all tracked objects, then calls {@code super.onDeregister()}.
-	 *
-	 * @see  #addOnClose(java.lang.Runnable)
-	 */
-	@Override
-	protected void onDeregister() {
-		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
-		// Close tracked objects
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, trackedConnections);
-		try {
-			super.onDeregister();
-		} catch(Throwable t) {
-			t0 = Throwables.addSuppressed(t0, t);
-		}
-		if(t0 != null) {
-			Logger l;
-			try {
-				l = getParentLogger();
-			} catch(SQLFeatureNotSupportedException e) {
-				l = logger;
-			}
-			l.log(Level.WARNING, "Errors during deregister closing connections", t0);
-		}
-	}
+  /**
+   * Calls onClose handlers, closes all tracked objects, then calls {@code super.onDeregister()}.
+   *
+   * @see  #addOnClose(java.lang.Runnable)
+   */
+  @Override
+  protected void onDeregister() {
+    Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
+    // Close tracked objects
+    t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, trackedConnections);
+    try {
+      super.onDeregister();
+    } catch (Throwable t) {
+      t0 = Throwables.addSuppressed(t0, t);
+    }
+    if (t0 != null) {
+      Logger l;
+      try {
+        l = getParentLogger();
+      } catch (SQLFeatureNotSupportedException e) {
+        l = logger;
+      }
+      l.log(Level.WARNING, "Errors during deregister closing connections", t0);
+    }
+  }
 }

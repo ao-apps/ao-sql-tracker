@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedNClobs {
 
-	/**
-	 * Gets all the nclobs that have not yet been freed.
-	 *
-	 * @return  The mapping from wrapped nclob to tracker without any defensive copy.
-	 *
-	 * @see  NClob#free()
-	 */
-	Map<NClob, ? extends NClobTracker> getTrackedNClobs();
+  /**
+   * Gets all the nclobs that have not yet been freed.
+   *
+   * @return  The mapping from wrapped nclob to tracker without any defensive copy.
+   *
+   * @see  NClob#free()
+   */
+  Map<NClob, ? extends NClobTracker> getTrackedNClobs();
 }

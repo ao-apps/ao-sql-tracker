@@ -29,12 +29,12 @@ import java.util.Map;
 
 public interface TrackedSavepoints {
 
-	/**
-	 * Gets all the savepoints that have not yet been released.
-	 *
-	 * @return  The mapping from wrapped savepoint to tracker without any defensive copy.
-	 *
-	 * @see  Connection#releaseSavepoint(java.sql.Savepoint)
-	 */
-	Map<Savepoint, ? extends SavepointTracker> getTrackedSavepoints();
+  /**
+   * Gets all the savepoints that have not yet been released.
+   *
+   * @return  The mapping from wrapped savepoint to tracker without any defensive copy.
+   *
+   * @see  Connection#releaseSavepoint(java.sql.Savepoint)
+   */
+  Map<Savepoint, ? extends SavepointTracker> getTrackedSavepoints();
 }

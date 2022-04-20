@@ -34,11 +34,11 @@ import java.sql.SQLException;
  */
 public interface ResultSetMetaDataTracker extends ResultSetMetaDataWrapper, OnCloseHandler {
 
-	/**
-	 * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
-	 *
-	 * @see  #addOnClose(java.lang.Runnable)
-	 */
-	@Override
-	void close() throws SQLException;
+  /**
+   * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
+   *
+   * @see  #addOnClose(java.lang.Runnable)
+   */
+  @Override
+  void close() throws SQLException;
 }

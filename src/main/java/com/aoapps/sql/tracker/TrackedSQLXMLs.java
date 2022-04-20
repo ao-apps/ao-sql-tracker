@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedSQLXMLs {
 
-	/**
-	 * Gets all the SQL XMLs that have not yet been freed.
-	 *
-	 * @return  The mapping from wrapped SQL XML to tracker without any defensive copy.
-	 *
-	 * @see  SQLXML#free()
-	 */
-	Map<SQLXML, ? extends SQLXMLTracker> getTrackedSQLXMLs();
+  /**
+   * Gets all the SQL XMLs that have not yet been freed.
+   *
+   * @return  The mapping from wrapped SQL XML to tracker without any defensive copy.
+   *
+   * @see  SQLXML#free()
+   */
+  Map<SQLXML, ? extends SQLXMLTracker> getTrackedSQLXMLs();
 }

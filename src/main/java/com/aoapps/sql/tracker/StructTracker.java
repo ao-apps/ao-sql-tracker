@@ -34,11 +34,11 @@ import java.sql.Struct;
  */
 public interface StructTracker extends StructWrapper, OnCloseHandler {
 
-	/**
-	 * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
-	 *
-	 * @see  #addOnClose(java.lang.Runnable)
-	 */
-	@Override
-	void close() throws SQLException;
+  /**
+   * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
+   *
+   * @see  #addOnClose(java.lang.Runnable)
+   */
+  @Override
+  void close() throws SQLException;
 }

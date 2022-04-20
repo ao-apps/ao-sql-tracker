@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedWriters {
 
-	/**
-	 * Gets all the writers that have not yet been closed.
-	 *
-	 * @return  The mapping from wrapped writer to tracker without any defensive copy.
-	 *
-	 * @see  Writer#close()
-	 */
-	Map<Writer, ? extends WriterTracker> getTrackedWriters();
+  /**
+   * Gets all the writers that have not yet been closed.
+   *
+   * @return  The mapping from wrapped writer to tracker without any defensive copy.
+   *
+   * @see  Writer#close()
+   */
+  Map<Writer, ? extends WriterTracker> getTrackedWriters();
 }

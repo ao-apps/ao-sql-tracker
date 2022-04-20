@@ -44,68 +44,70 @@ import java.util.logging.Logger;
  */
 public class BlobTrackerImpl extends BlobWrapperImpl implements BlobTracker {
 
-	private static final Logger logger = Logger.getLogger(BlobTrackerImpl.class.getName());
+  private static final Logger logger = Logger.getLogger(BlobTrackerImpl.class.getName());
 
-	public BlobTrackerImpl(ConnectionTrackerImpl connectionTracker, Blob wrapped) {
-		super(connectionTracker, wrapped);
-	}
+  public BlobTrackerImpl(ConnectionTrackerImpl connectionTracker, Blob wrapped) {
+    super(connectionTracker, wrapped);
+  }
 
-	private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
+  private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
 
-	@Override
-	public void addOnClose(Runnable onCloseHandler) {
-		onCloseHandlers.add(onCloseHandler);
-	}
+  @Override
+  public void addOnClose(Runnable onCloseHandler) {
+    onCloseHandlers.add(onCloseHandler);
+  }
 
-	private final Map<InputStream, InputStreamTracker> trackedInputStreams = synchronizedMap(new IdentityHashMap<>());
-	private final Map<OutputStream, OutputStreamTracker> trackedOutputStreams = synchronizedMap(new IdentityHashMap<>());
+  private final Map<InputStream, InputStreamTracker> trackedInputStreams = synchronizedMap(new IdentityHashMap<>());
+  private final Map<OutputStream, OutputStreamTracker> trackedOutputStreams = synchronizedMap(new IdentityHashMap<>());
 
-	@Override
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	public final Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
-		return trackedInputStreams;
-	}
+  @Override
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
+  public final Map<InputStream, InputStreamTracker> getTrackedInputStreams() {
+    return trackedInputStreams;
+  }
 
-	@Override
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	public final Map<OutputStream, OutputStreamTracker> getTrackedOutputStreams() {
-		return trackedOutputStreams;
-	}
+  @Override
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
+  public final Map<OutputStream, OutputStreamTracker> getTrackedOutputStreams() {
+    return trackedOutputStreams;
+  }
 
-	@Override
-	protected InputStreamTracker wrapInputStream(InputStream in) {
-		return ConnectionTrackerImpl.getIfAbsent(
-			trackedInputStreams, in,
-			() -> (InputStreamTracker)super.wrapInputStream(in),
-			InputStreamTracker::getWrapped
-		);
-	}
+  @Override
+  protected InputStreamTracker wrapInputStream(InputStream in) {
+    return ConnectionTrackerImpl.getIfAbsent(
+      trackedInputStreams, in,
+      () -> (InputStreamTracker)super.wrapInputStream(in),
+      InputStreamTracker::getWrapped
+    );
+  }
 
-	@Override
-	protected OutputStreamTracker wrapOutputStream(OutputStream out) {
-		return ConnectionTrackerImpl.getIfAbsent(
-			trackedOutputStreams, out,
-			() -> (OutputStreamTracker)super.wrapOutputStream(out),
-			OutputStreamTracker::getWrapped
-		);
-	}
+  @Override
+  protected OutputStreamTracker wrapOutputStream(OutputStream out) {
+    return ConnectionTrackerImpl.getIfAbsent(
+      trackedOutputStreams, out,
+      () -> (OutputStreamTracker)super.wrapOutputStream(out),
+      OutputStreamTracker::getWrapped
+    );
+  }
 
-	/**
-	 * @see  InputStreamTracker#close()
-	 * @see  OutputStreamTracker#close()
-	 */
-	@Override
-	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch", "unchecked"})
-	public void free() throws SQLException {
-		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
-		// Close tracked objects
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, BlobTrackerImpl.class, "free()", "trackedInputStreams", trackedInputStreams);
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, BlobTrackerImpl.class, "free()", "trackedOutputStreams", trackedOutputStreams);
-		try {
-			super.free();
-		} catch(Throwable t) {
-			t0 = Throwables.addSuppressed(t0, t);
-		}
-		if(t0 != null) throw Throwables.wrap(t0, SQLException.class, SQLException::new);
-	}
+  /**
+   * @see  InputStreamTracker#close()
+   * @see  OutputStreamTracker#close()
+   */
+  @Override
+  @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch", "unchecked"})
+  public void free() throws SQLException {
+    Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
+    // Close tracked objects
+    t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, BlobTrackerImpl.class, "free()", "trackedInputStreams", trackedInputStreams);
+    t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, BlobTrackerImpl.class, "free()", "trackedOutputStreams", trackedOutputStreams);
+    try {
+      super.free();
+    } catch (Throwable t) {
+      t0 = Throwables.addSuppressed(t0, t);
+    }
+    if (t0 != null) {
+      throw Throwables.wrap(t0, SQLException.class, SQLException::new);
+    }
+  }
 }

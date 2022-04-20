@@ -33,16 +33,16 @@ import java.sql.SQLXML;
  * @author  AO Industries, Inc.
  */
 public interface SQLXMLTracker extends SQLXMLWrapper, OnCloseHandler,
-	TrackedInputStreams,
-	TrackedOutputStreams,
-	TrackedReaders,
-	TrackedWriters {
+  TrackedInputStreams,
+  TrackedOutputStreams,
+  TrackedReaders,
+  TrackedWriters {
 
-	/**
-	 * Calls onClose handlers, closes all tracked objects, then calls {@code super.free()}.
-	 *
-	 * @see  #addOnClose(java.lang.Runnable)
-	 */
-	@Override
-	void free() throws SQLException;
+  /**
+   * Calls onClose handlers, closes all tracked objects, then calls {@code super.free()}.
+   *
+   * @see  #addOnClose(java.lang.Runnable)
+   */
+  @Override
+  void free() throws SQLException;
 }

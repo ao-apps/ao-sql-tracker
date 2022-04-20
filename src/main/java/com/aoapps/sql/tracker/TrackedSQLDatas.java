@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedSQLDatas {
 
-	/**
-	 * Gets all the SQL datas that have not yet been closed.
-	 *
-	 * @return  The mapping from wrapped SQL data to tracker without any defensive copy.
-	 *
-	 * @see  SQLOutputTrackerImpl#writeObject(java.sql.SQLData)
-	 */
-	Map<SQLData, ? extends SQLDataTracker> getTrackedSQLDatas();
+  /**
+   * Gets all the SQL datas that have not yet been closed.
+   *
+   * @return  The mapping from wrapped SQL data to tracker without any defensive copy.
+   *
+   * @see  SQLOutputTrackerImpl#writeObject(java.sql.SQLData)
+   */
+  Map<SQLData, ? extends SQLDataTracker> getTrackedSQLDatas();
 }

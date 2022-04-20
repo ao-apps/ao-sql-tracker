@@ -29,12 +29,12 @@ import java.util.Map;
 
 public interface TrackedRefs {
 
-	/**
-	 * Gets all the refs that have not yet been closed.  Refs are assumed to be closed with their connection.
-	 *
-	 * @return  The mapping from wrapped ref to tracker without any defensive copy.
-	 *
-	 * @see  Connection#close()
-	 */
-	Map<Ref, ? extends RefTracker> getTrackedRefs();
+  /**
+   * Gets all the refs that have not yet been closed.  Refs are assumed to be closed with their connection.
+   *
+   * @return  The mapping from wrapped ref to tracker without any defensive copy.
+   *
+   * @see  Connection#close()
+   */
+  Map<Ref, ? extends RefTracker> getTrackedRefs();
 }

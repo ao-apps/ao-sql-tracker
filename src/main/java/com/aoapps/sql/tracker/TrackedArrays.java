@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedArrays {
 
-	/**
-	 * Gets all the arrays that have not yet been freed.
-	 *
-	 * @return  The mapping from wrapped array to tracker without any defensive copy.
-	 *
-	 * @see  Array#free()
-	 */
-	Map<Array, ? extends ArrayTracker> getTrackedArrays();
+  /**
+   * Gets all the arrays that have not yet been freed.
+   *
+   * @return  The mapping from wrapped array to tracker without any defensive copy.
+   *
+   * @see  Array#free()
+   */
+  Map<Array, ? extends ArrayTracker> getTrackedArrays();
 }

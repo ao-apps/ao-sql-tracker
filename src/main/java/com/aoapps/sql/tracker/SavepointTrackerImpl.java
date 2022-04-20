@@ -38,43 +38,47 @@ import java.util.List;
  */
 public class SavepointTrackerImpl extends SavepointWrapperImpl implements SavepointTracker {
 
-	public SavepointTrackerImpl(ConnectionTrackerImpl connectionTracker, Savepoint wrapped) {
-		super(connectionTracker, wrapped);
-	}
+  public SavepointTrackerImpl(ConnectionTrackerImpl connectionTracker, Savepoint wrapped) {
+    super(connectionTracker, wrapped);
+  }
 
-	private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
+  private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
 
-	@Override
-	public void addOnClose(Runnable onCloseHandler) {
-		onCloseHandlers.add(onCloseHandler);
-	}
+  @Override
+  public void addOnClose(Runnable onCloseHandler) {
+    onCloseHandlers.add(onCloseHandler);
+  }
 
-	/**
-	 * Called when this savepoint is released.
-	 *
-	 * @see  ConnectionTrackerImpl#setAutoCommit(boolean)
-	 * @see  ConnectionTrackerImpl#commit()
-	 * @see  ConnectionTrackerImpl#rollback()
-	 * @see  ConnectionTrackerImpl#rollback(java.sql.Savepoint)
-	 * @see  ConnectionTrackerImpl#releaseSavepoint(java.sql.Savepoint)
-	 */
-	protected void onRelease() throws SQLException {
-		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
-		if(t0 != null) throw Throwables.wrap(t0, SQLException.class, SQLException::new);
-	}
+  /**
+   * Called when this savepoint is released.
+   *
+   * @see  ConnectionTrackerImpl#setAutoCommit(boolean)
+   * @see  ConnectionTrackerImpl#commit()
+   * @see  ConnectionTrackerImpl#rollback()
+   * @see  ConnectionTrackerImpl#rollback(java.sql.Savepoint)
+   * @see  ConnectionTrackerImpl#releaseSavepoint(java.sql.Savepoint)
+   */
+  protected void onRelease() throws SQLException {
+    Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
+    if (t0 != null) {
+      throw Throwables.wrap(t0, SQLException.class, SQLException::new);
+    }
+  }
 
-	/**
-	 * @see  ConnectionTrackerImpl#releaseSavepoint(java.sql.Savepoint)
-	 */
-	@Override
-	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
-	public void close() throws SQLException {
-		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
-		try {
-			super.close();
-		} catch(Throwable t) {
-			t0 = Throwables.addSuppressed(t0, t);
-		}
-		if(t0 != null) throw Throwables.wrap(t0, SQLException.class, SQLException::new);
-	}
+  /**
+   * @see  ConnectionTrackerImpl#releaseSavepoint(java.sql.Savepoint)
+   */
+  @Override
+  @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
+  public void close() throws SQLException {
+    Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
+    try {
+      super.close();
+    } catch (Throwable t) {
+      t0 = Throwables.addSuppressed(t0, t);
+    }
+    if (t0 != null) {
+      throw Throwables.wrap(t0, SQLException.class, SQLException::new);
+    }
+  }
 }

@@ -33,21 +33,21 @@ import java.sql.SQLInput;
  * @author  AO Industries, Inc.
  */
 public interface SQLInputTracker extends SQLInputWrapper, OnCloseHandler,
-	TrackedArrays,
-	TrackedBlobs,
-	TrackedClobs,
-	TrackedInputStreams,
-	TrackedNClobs,
-	TrackedReaders,
-	TrackedRefs,
-	TrackedRowIds,
-	TrackedSQLXMLs {
+  TrackedArrays,
+  TrackedBlobs,
+  TrackedClobs,
+  TrackedInputStreams,
+  TrackedNClobs,
+  TrackedReaders,
+  TrackedRefs,
+  TrackedRowIds,
+  TrackedSQLXMLs {
 
-	/**
-	 * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
-	 *
-	 * @see  #addOnClose(java.lang.Runnable)
-	 */
-	@Override
-	void close() throws SQLException;
+  /**
+   * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
+   *
+   * @see  #addOnClose(java.lang.Runnable)
+   */
+  @Override
+  void close() throws SQLException;
 }

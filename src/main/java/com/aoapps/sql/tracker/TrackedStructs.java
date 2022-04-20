@@ -29,12 +29,12 @@ import java.util.Map;
 
 public interface TrackedStructs {
 
-	/**
-	 * Gets all the structs that have not yet been closed.  Structs are assumed to be closed with their connection.
-	 *
-	 * @return  The mapping from wrapped struct to tracker without any defensive copy.
-	 *
-	 * @see  Connection#close()
-	 */
-	Map<Struct, ? extends StructTracker> getTrackedStructs();
+  /**
+   * Gets all the structs that have not yet been closed.  Structs are assumed to be closed with their connection.
+   *
+   * @return  The mapping from wrapped struct to tracker without any defensive copy.
+   *
+   * @see  Connection#close()
+   */
+  Map<Struct, ? extends StructTracker> getTrackedStructs();
 }

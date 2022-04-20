@@ -29,12 +29,12 @@ import java.util.Map;
 
 public interface TrackedRowIds {
 
-	/**
-	 * Gets all the row IDs that have not yet been closed.  Row IDs are assumed to be closed with their connection.
-	 *
-	 * @return  The mapping from wrapped row ID to tracker without any defensive copy.
-	 *
-	 * @see  Connection#close()
-	 */
-	Map<RowId, ? extends RowIdTracker> getTrackedRowIds();
+  /**
+   * Gets all the row IDs that have not yet been closed.  Row IDs are assumed to be closed with their connection.
+   *
+   * @return  The mapping from wrapped row ID to tracker without any defensive copy.
+   *
+   * @see  Connection#close()
+   */
+  Map<RowId, ? extends RowIdTracker> getTrackedRowIds();
 }

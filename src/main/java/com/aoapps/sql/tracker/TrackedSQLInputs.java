@@ -29,12 +29,12 @@ import java.util.Map;
 
 public interface TrackedSQLInputs {
 
-	/**
-	 * Gets all the SQL inputs that have not yet been closed.
-	 *
-	 * @return  The mapping from wrapped SQL input to tracker without any defensive copy.
-	 *
-	 * @see  SQLDataWrapperImpl#readSQL(java.sql.SQLInput, java.lang.String)
-	 */
-	Map<SQLInput, ? extends SQLInputTracker> getTrackedSQLInputs();
+  /**
+   * Gets all the SQL inputs that have not yet been closed.
+   *
+   * @return  The mapping from wrapped SQL input to tracker without any defensive copy.
+   *
+   * @see  SQLDataWrapperImpl#readSQL(java.sql.SQLInput, java.lang.String)
+   */
+  Map<SQLInput, ? extends SQLInputTracker> getTrackedSQLInputs();
 }

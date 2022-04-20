@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedOutputStreams {
 
-	/**
-	 * Gets all the output streams that have not yet been closed.
-	 *
-	 * @return  The mapping from wrapped output stream to tracker without any defensive copy.
-	 *
-	 * @see  OutputStream#close()
-	 */
-	Map<OutputStream, ? extends OutputStreamTracker> getTrackedOutputStreams();
+  /**
+   * Gets all the output streams that have not yet been closed.
+   *
+   * @return  The mapping from wrapped output stream to tracker without any defensive copy.
+   *
+   * @see  OutputStream#close()
+   */
+  Map<OutputStream, ? extends OutputStreamTracker> getTrackedOutputStreams();
 }

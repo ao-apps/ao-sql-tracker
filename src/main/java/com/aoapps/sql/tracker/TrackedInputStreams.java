@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedInputStreams {
 
-	/**
-	 * Gets all the input streams that have not yet been closed.
-	 *
-	 * @return  The mapping from wrapped input stream to tracker without any defensive copy.
-	 *
-	 * @see  InputStream#close()
-	 */
-	Map<InputStream, ? extends InputStreamTracker> getTrackedInputStreams();
+  /**
+   * Gets all the input streams that have not yet been closed.
+   *
+   * @return  The mapping from wrapped input stream to tracker without any defensive copy.
+   *
+   * @see  InputStream#close()
+   */
+  Map<InputStream, ? extends InputStreamTracker> getTrackedInputStreams();
 }

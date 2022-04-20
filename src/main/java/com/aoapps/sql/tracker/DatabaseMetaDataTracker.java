@@ -33,13 +33,13 @@ import java.sql.SQLException;
  * @author  AO Industries, Inc.
  */
 public interface DatabaseMetaDataTracker extends DatabaseMetaDataWrapper, OnCloseHandler,
-	TrackedResultSets {
+  TrackedResultSets {
 
-	/**
-	 * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
-	 *
-	 * @see  #addOnClose(java.lang.Runnable)
-	 */
-	@Override
-	void close() throws SQLException;
+  /**
+   * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
+   *
+   * @see  #addOnClose(java.lang.Runnable)
+   */
+  @Override
+  void close() throws SQLException;
 }

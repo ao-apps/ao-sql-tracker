@@ -38,31 +38,33 @@ import java.util.List;
  */
 public class WriterTracker extends WriterWrapper implements OnCloseHandler {
 
-	public WriterTracker(ConnectionTrackerImpl connectionTracker, Writer wrapped) {
-		super(connectionTracker, wrapped);
-	}
+  public WriterTracker(ConnectionTrackerImpl connectionTracker, Writer wrapped) {
+    super(connectionTracker, wrapped);
+  }
 
-	private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
+  private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
 
-	@Override
-	public void addOnClose(Runnable onCloseHandler) {
-		onCloseHandlers.add(onCloseHandler);
-	}
+  @Override
+  public void addOnClose(Runnable onCloseHandler) {
+    onCloseHandlers.add(onCloseHandler);
+  }
 
-	/**
-	 * Calls onClose handlers then {@code super.close()}.
-	 *
-	 * @see  #addOnClose(java.lang.Runnable)
-	 */
-	@Override
-	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
-	public void close() throws IOException {
-		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
-		try {
-			super.close();
-		} catch(Throwable t) {
-			t0 = Throwables.addSuppressed(t0, t);
-		}
-		if(t0 != null) throw Throwables.wrap(t0, IOException.class, IOException::new);
-	}
+  /**
+   * Calls onClose handlers then {@code super.close()}.
+   *
+   * @see  #addOnClose(java.lang.Runnable)
+   */
+  @Override
+  @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
+  public void close() throws IOException {
+    Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
+    try {
+      super.close();
+    } catch (Throwable t) {
+      t0 = Throwables.addSuppressed(t0, t);
+    }
+    if (t0 != null) {
+      throw Throwables.wrap(t0, IOException.class, IOException::new);
+    }
+  }
 }

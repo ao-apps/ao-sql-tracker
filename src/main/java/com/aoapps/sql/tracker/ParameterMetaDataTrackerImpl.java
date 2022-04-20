@@ -38,26 +38,28 @@ import java.util.List;
  */
 public class ParameterMetaDataTrackerImpl extends ParameterMetaDataWrapperImpl implements ParameterMetaDataTracker {
 
-	public ParameterMetaDataTrackerImpl(ConnectionTrackerImpl connectionTracker, ParameterMetaData wrapped) {
-		super(connectionTracker, wrapped);
-	}
+  public ParameterMetaDataTrackerImpl(ConnectionTrackerImpl connectionTracker, ParameterMetaData wrapped) {
+    super(connectionTracker, wrapped);
+  }
 
-	private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
+  private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
 
-	@Override
-	public void addOnClose(Runnable onCloseHandler) {
-		onCloseHandlers.add(onCloseHandler);
-	}
+  @Override
+  public void addOnClose(Runnable onCloseHandler) {
+    onCloseHandlers.add(onCloseHandler);
+  }
 
-	@Override
-	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
-	public void close() throws SQLException {
-		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
-		try {
-			super.close();
-		} catch(Throwable t) {
-			t0 = Throwables.addSuppressed(t0, t);
-		}
-		if(t0 != null) throw Throwables.wrap(t0, SQLException.class, SQLException::new);
-	}
+  @Override
+  @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
+  public void close() throws SQLException {
+    Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
+    try {
+      super.close();
+    } catch (Throwable t) {
+      t0 = Throwables.addSuppressed(t0, t);
+    }
+    if (t0 != null) {
+      throw Throwables.wrap(t0, SQLException.class, SQLException::new);
+    }
+  }
 }

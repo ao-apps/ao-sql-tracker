@@ -29,12 +29,12 @@ import java.util.Map;
 
 public interface TrackedResultSetMetaDatas {
 
-	/**
-	 * Gets all the meta data that have not yet been closed.  Meta datas are assumed to be closed with their result set.
-	 *
-	 * @return  The mapping from wrapped meta data to tracker without any defensive copy.
-	 *
-	 * @see  ResultSet#close()
-	 */
-	Map<ResultSetMetaData, ? extends ResultSetMetaDataTracker> getTrackedResultSetMetaDatas();
+  /**
+   * Gets all the meta data that have not yet been closed.  Meta datas are assumed to be closed with their result set.
+   *
+   * @return  The mapping from wrapped meta data to tracker without any defensive copy.
+   *
+   * @see  ResultSet#close()
+   */
+  Map<ResultSetMetaData, ? extends ResultSetMetaDataTracker> getTrackedResultSetMetaDatas();
 }

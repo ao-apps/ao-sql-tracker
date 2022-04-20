@@ -29,12 +29,12 @@ import java.util.Map;
 
 public interface TrackedDatabaseMetaDatas {
 
-	/**
-	 * Gets all the meta data that have not yet been closed.  Meta datas are assumed to be closed with their connection.
-	 *
-	 * @return  The mapping from wrapped meta data to tracker without any defensive copy.
-	 *
-	 * @see  Connection#close()
-	 */
-	Map<DatabaseMetaData, ? extends DatabaseMetaDataTracker> getTrackedDatabaseMetaDatas();
+  /**
+   * Gets all the meta data that have not yet been closed.  Meta datas are assumed to be closed with their connection.
+   *
+   * @return  The mapping from wrapped meta data to tracker without any defensive copy.
+   *
+   * @see  Connection#close()
+   */
+  Map<DatabaseMetaData, ? extends DatabaseMetaDataTracker> getTrackedDatabaseMetaDatas();
 }

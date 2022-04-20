@@ -46,68 +46,70 @@ import java.util.logging.Logger;
  */
 public class SQLDataTrackerImpl extends SQLDataWrapperImpl implements SQLDataTracker {
 
-	private static final Logger logger = Logger.getLogger(SQLDataTrackerImpl.class.getName());
+  private static final Logger logger = Logger.getLogger(SQLDataTrackerImpl.class.getName());
 
-	public SQLDataTrackerImpl(ConnectionTrackerImpl connectionTracker, SQLData wrapped) {
-		super(connectionTracker, wrapped);
-	}
+  public SQLDataTrackerImpl(ConnectionTrackerImpl connectionTracker, SQLData wrapped) {
+    super(connectionTracker, wrapped);
+  }
 
-	private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
+  private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
 
-	@Override
-	public void addOnClose(Runnable onCloseHandler) {
-		onCloseHandlers.add(onCloseHandler);
-	}
+  @Override
+  public void addOnClose(Runnable onCloseHandler) {
+    onCloseHandlers.add(onCloseHandler);
+  }
 
-	private final Map<SQLInput, SQLInputTrackerImpl> trackedSQLInputs = synchronizedMap(new IdentityHashMap<>());
-	private final Map<SQLOutput, SQLOutputTrackerImpl> trackedSQLOutputs = synchronizedMap(new IdentityHashMap<>());
+  private final Map<SQLInput, SQLInputTrackerImpl> trackedSQLInputs = synchronizedMap(new IdentityHashMap<>());
+  private final Map<SQLOutput, SQLOutputTrackerImpl> trackedSQLOutputs = synchronizedMap(new IdentityHashMap<>());
 
-	@Override
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	public final Map<SQLInput, SQLInputTrackerImpl> getTrackedSQLInputs() {
-		return trackedSQLInputs;
-	}
+  @Override
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
+  public final Map<SQLInput, SQLInputTrackerImpl> getTrackedSQLInputs() {
+    return trackedSQLInputs;
+  }
 
-	@Override
-	@SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
-	public final Map<SQLOutput, SQLOutputTrackerImpl> getTrackedSQLOutputs() {
-		return trackedSQLOutputs;
-	}
+  @Override
+  @SuppressWarnings("ReturnOfCollectionOrArrayField") // No defensive copy
+  public final Map<SQLOutput, SQLOutputTrackerImpl> getTrackedSQLOutputs() {
+    return trackedSQLOutputs;
+  }
 
-	@Override
-	protected SQLInputWrapperImpl wrapSQLInput(SQLInput sqlInput) {
-		return ConnectionTrackerImpl.getIfAbsent(
-			trackedSQLInputs, sqlInput,
-			() -> (SQLInputTrackerImpl)super.wrapSQLInput(sqlInput),
-			SQLInputTrackerImpl::getWrapped
-		);
-	}
+  @Override
+  protected SQLInputWrapperImpl wrapSQLInput(SQLInput sqlInput) {
+    return ConnectionTrackerImpl.getIfAbsent(
+      trackedSQLInputs, sqlInput,
+      () -> (SQLInputTrackerImpl)super.wrapSQLInput(sqlInput),
+      SQLInputTrackerImpl::getWrapped
+    );
+  }
 
-	@Override
-	protected SQLOutputWrapperImpl wrapSQLOutput(SQLOutput sqlOutput) {
-		return ConnectionTrackerImpl.getIfAbsent(
-			trackedSQLOutputs, sqlOutput,
-			() -> (SQLOutputTrackerImpl)super.wrapSQLOutput(sqlOutput),
-			SQLOutputTrackerImpl::getWrapped
-		);
-	}
+  @Override
+  protected SQLOutputWrapperImpl wrapSQLOutput(SQLOutput sqlOutput) {
+    return ConnectionTrackerImpl.getIfAbsent(
+      trackedSQLOutputs, sqlOutput,
+      () -> (SQLOutputTrackerImpl)super.wrapSQLOutput(sqlOutput),
+      SQLOutputTrackerImpl::getWrapped
+    );
+  }
 
-	/**
-	 * @see  SQLInputTrackerImpl#close()
-	 * @see  SQLOutputTrackerImpl#close()
-	 */
-	@Override
-	@SuppressWarnings({"UseSpecificCatch", "TooBroadCatch", "unchecked"})
-	public void close() throws SQLException {
-		Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
-		// Close tracked objects
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLDataTrackerImpl.class, "close()", "trackedSQLInputs", trackedSQLInputs);
-		t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLDataTrackerImpl.class, "close()", "trackedSQLOutputs", trackedSQLOutputs);
-		try {
-			super.close();
-		} catch(Throwable t) {
-			t0 = Throwables.addSuppressed(t0, t);
-		}
-		if(t0 != null) throw Throwables.wrap(t0, SQLException.class, SQLException::new);
-	}
+  /**
+   * @see  SQLInputTrackerImpl#close()
+   * @see  SQLOutputTrackerImpl#close()
+   */
+  @Override
+  @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch", "unchecked"})
+  public void close() throws SQLException {
+    Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
+    // Close tracked objects
+    t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLDataTrackerImpl.class, "close()", "trackedSQLInputs", trackedSQLInputs);
+    t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0, logger, SQLDataTrackerImpl.class, "close()", "trackedSQLOutputs", trackedSQLOutputs);
+    try {
+      super.close();
+    } catch (Throwable t) {
+      t0 = Throwables.addSuppressed(t0, t);
+    }
+    if (t0 != null) {
+      throw Throwables.wrap(t0, SQLException.class, SQLException::new);
+    }
+  }
 }

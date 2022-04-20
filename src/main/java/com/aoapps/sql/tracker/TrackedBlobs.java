@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedBlobs {
 
-	/**
-	 * Gets all the blobs that have not yet been freed.
-	 *
-	 * @return  The mapping from wrapped blob to tracker without any defensive copy.
-	 *
-	 * @see  Blob#free()
-	 */
-	Map<Blob, ? extends BlobTracker> getTrackedBlobs();
+  /**
+   * Gets all the blobs that have not yet been freed.
+   *
+   * @return  The mapping from wrapped blob to tracker without any defensive copy.
+   *
+   * @see  Blob#free()
+   */
+  Map<Blob, ? extends BlobTracker> getTrackedBlobs();
 }

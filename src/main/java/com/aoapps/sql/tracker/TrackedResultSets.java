@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedResultSets {
 
-	/**
-	 * Gets all the result sets that have not yet been closed.
-	 *
-	 * @return  The mapping from wrapped result set to tracker without any defensive copy.
-	 *
-	 * @see  ResultSet#close()
-	 */
-	Map<ResultSet, ? extends ResultSetTracker> getTrackedResultSets();
+  /**
+   * Gets all the result sets that have not yet been closed.
+   *
+   * @return  The mapping from wrapped result set to tracker without any defensive copy.
+   *
+   * @see  ResultSet#close()
+   */
+  Map<ResultSet, ? extends ResultSetTracker> getTrackedResultSets();
 }

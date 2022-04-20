@@ -30,8 +30,8 @@ package com.aoapps.sql.tracker;
  */
 public interface OnCloseHandler {
 
-	/**
-	 * Will call the handler once on close/free.
-	 */
-	void addOnClose(Runnable onCloseHandler);
+  /**
+   * Will call the handler once on close/free.
+   */
+  void addOnClose(Runnable onCloseHandler);
 }

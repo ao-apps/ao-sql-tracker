@@ -28,12 +28,12 @@ import java.util.Map;
 
 public interface TrackedReaders {
 
-	/**
-	 * Gets all the readers that have not yet been closed.
-	 *
-	 * @return  The mapping from wrapped reader to tracker without any defensive copy.
-	 *
-	 * @see  Reader#close()
-	 */
-	Map<Reader, ? extends ReaderTracker> getTrackedReaders();
+  /**
+   * Gets all the readers that have not yet been closed.
+   *
+   * @return  The mapping from wrapped reader to tracker without any defensive copy.
+   *
+   * @see  Reader#close()
+   */
+  Map<Reader, ? extends ReaderTracker> getTrackedReaders();
 }
