@@ -33,16 +33,16 @@ import java.sql.SQLException;
  * @author  AO Industries, Inc.
  */
 public interface ResultSetTracker extends ResultSetWrapper, OnCloseHandler,
-  TrackedArrays,
-  TrackedBlobs,
-  TrackedClobs,
-  TrackedInputStreams,
-  TrackedNClobs,
-  TrackedReaders,
-  TrackedRefs,
-  TrackedResultSetMetaDatas,
-  TrackedRowIds,
-  TrackedSQLXMLs {
+    TrackedArrays,
+    TrackedBlobs,
+    TrackedClobs,
+    TrackedInputStreams,
+    TrackedNClobs,
+    TrackedReaders,
+    TrackedRefs,
+    TrackedResultSetMetaDatas,
+    TrackedRowIds,
+    TrackedSQLXMLs {
 
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.

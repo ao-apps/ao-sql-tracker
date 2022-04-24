@@ -122,16 +122,16 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
    */
   @SuppressWarnings("unchecked")
   private final Map<Savepoint, SavepointTrackerImpl> trackedSavepoints = synchronizedMap(
-    TransformMap.of(
-      new LinkedHashMap<>(),
-      new FunctionalTransformer<>(
-        Savepoint.class,
-        /*(Class<IdentityKey<Savepoint>>)*/(Class)IdentityKey.class,
-        IdentityKey::of,
-        IdentityKey::getValue
-      ),
-      Transformer.identity()
-    )
+      TransformMap.of(
+          new LinkedHashMap<>(),
+          new FunctionalTransformer<>(
+              Savepoint.class,
+                  /*(Class<IdentityKey<Savepoint>>)*/(Class) IdentityKey.class,
+              IdentityKey::of,
+              IdentityKey::getValue
+          ),
+          Transformer.identity()
+      )
   );
 
   private final Map<Statement, StatementTrackerImpl> trackedStatements = synchronizedMap(new IdentityHashMap<>());
@@ -355,10 +355,10 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
    * @return  The value, either obtained from the map or retrieved
    */
   static <K, V extends OnCloseHandler, Ex extends Throwable> V getIfAbsent(
-    Map<K, V> map,
-    K wrapped,
-    CallableE<? extends V, ? extends Ex> getTracker,
-    Function<? super V, ? extends K> keyFunction
+      Map<K, V> map,
+      K wrapped,
+      CallableE<? extends V, ? extends Ex> getTracker,
+      Function<? super V, ? extends K> keyFunction
   ) throws Ex {
     if (wrapped != null) {
       V tracker;
@@ -367,11 +367,11 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
         if (tracker == null) {
           V gotTracker = getTracker.call();
           tracker = map.computeIfAbsent(
-            keyFunction.apply(gotTracker),
-            key -> {
-              gotTracker.addOnClose(() -> map.remove(key, gotTracker));
-              return gotTracker;
-            }
+              keyFunction.apply(gotTracker),
+              key -> {
+                gotTracker.addOnClose(() -> map.remove(key, gotTracker));
+                return gotTracker;
+              }
           );
         } else {
           assert keyFunction.apply(tracker) == wrapped : "tracker from map does not track the expected object";
@@ -395,19 +395,19 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
    * @return  The value, either obtained from the map or new
    */
   static <T, K, V extends OnCloseHandler> V newIfAbsent(
-    Map<K, V> map,
-    T thisTracker,
-    K wrapped,
-    BiFunction<? super T, ? super K, ? extends V> newTracker
+      Map<K, V> map,
+      T thisTracker,
+      K wrapped,
+      BiFunction<? super T, ? super K, ? extends V> newTracker
   ) {
     return map.computeIfAbsent(
-      wrapped,
-      k -> {
-        assert k == wrapped;
-        V tracker = newTracker.apply(thisTracker, k);
-        tracker.addOnClose(() -> map.remove(k, tracker));
-        return tracker;
-      }
+        wrapped,
+        k -> {
+          assert k == wrapped;
+          V tracker = newTracker.apply(thisTracker, k);
+          tracker.addOnClose(() -> map.remove(k, tracker));
+          return tracker;
+        }
     );
   }
 
@@ -415,9 +415,9 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
    * @see  #newIfAbsent(java.util.Map, java.lang.Object, java.lang.Object, java.util.function.BiFunction)
    */
   private <K, V extends OnCloseHandler> V newIfAbsent(
-    Map<K, V> map,
-    K wrapped,
-    BiFunction<? super ConnectionTrackerImpl, ? super K, ? extends V> newTracker
+      Map<K, V> map,
+      K wrapped,
+      BiFunction<? super ConnectionTrackerImpl, ? super K, ? extends V> newTracker
   ) {
     return newIfAbsent(map, this, wrapped, newTracker);
   }
@@ -510,7 +510,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
   @Override
   protected ArrayTrackerImpl newArrayWrapper(StatementWrapperImpl stmtWrapper, Array array) {
     return newIfAbsent(trackedArrays, array, (conn, k) ->
-      new ArrayTrackerImpl(conn, stmtWrapper, k));
+        new ArrayTrackerImpl(conn, stmtWrapper, k));
   }
 
   @Override
@@ -571,7 +571,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
   @Override
   protected ResultSetTrackerImpl newResultSetWrapper(StatementWrapperImpl stmtWrapper, ResultSet results) {
     return newIfAbsent(trackedResultSets, results, (conn, k) ->
-      new ResultSetTrackerImpl(conn, stmtWrapper, k));
+        new ResultSetTrackerImpl(conn, stmtWrapper, k));
   }
 
   @Override
@@ -727,7 +727,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
   public void rollback(Savepoint savepoint) throws SQLException {
     // Release tracked objects
     // Call onRelease for all that follow the given savepoint
-    SavepointTrackerImpl savepointTracker = (SavepointTrackerImpl)wrapSavepoint(savepoint);
+    SavepointTrackerImpl savepointTracker = (SavepointTrackerImpl) wrapSavepoint(savepoint);
     List<SavepointTrackerImpl> toRelease = new ArrayList<>();
     synchronized (trackedSavepoints) {
       Iterator<SavepointTrackerImpl> iter = trackedSavepoints.values().iterator();
@@ -770,7 +770,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
   public void releaseSavepoint(Savepoint savepoint) throws SQLException {
     // Release tracked objects
     // Call onRelease for the given savepoint and all that follow
-    SavepointTrackerImpl savepointTracker = (SavepointTrackerImpl)wrapSavepoint(savepoint);
+    SavepointTrackerImpl savepointTracker = (SavepointTrackerImpl) wrapSavepoint(savepoint);
     List<SavepointTrackerImpl> toRelease = new ArrayList<>();
     synchronized (trackedSavepoints) {
       Iterator<SavepointTrackerImpl> iter = trackedSavepoints.values().iterator();

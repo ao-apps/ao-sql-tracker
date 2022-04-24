@@ -91,36 +91,36 @@ public class NClobTrackerImpl extends NClobWrapperImpl implements NClobTracker {
   @Override
   protected InputStreamTracker wrapInputStream(InputStream in) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedInputStreams, in,
-      () -> (InputStreamTracker)super.wrapInputStream(in),
-      InputStreamTracker::getWrapped
+        trackedInputStreams, in,
+        () -> (InputStreamTracker) super.wrapInputStream(in),
+        InputStreamTracker::getWrapped
     );
   }
 
   @Override
   protected OutputStreamTracker wrapOutputStream(OutputStream out) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedOutputStreams, out,
-      () -> (OutputStreamTracker)super.wrapOutputStream(out),
-      OutputStreamTracker::getWrapped
+        trackedOutputStreams, out,
+        () -> (OutputStreamTracker) super.wrapOutputStream(out),
+        OutputStreamTracker::getWrapped
     );
   }
 
   @Override
   protected ReaderTracker wrapReader(Reader in) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedReaders, in,
-      () -> (ReaderTracker)super.wrapReader(in),
-      ReaderTracker::getWrapped
+        trackedReaders, in,
+        () -> (ReaderTracker) super.wrapReader(in),
+        ReaderTracker::getWrapped
     );
   }
 
   @Override
   protected WriterTracker wrapWriter(Writer out) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedWriters, out,
-      () -> (WriterTracker)super.wrapWriter(out),
-      WriterTracker::getWrapped
+        trackedWriters, out,
+        () -> (WriterTracker) super.wrapWriter(out),
+        WriterTracker::getWrapped
     );
   }
 

@@ -150,89 +150,89 @@ public class CallableStatementTrackerImpl extends CallableStatementWrapperImpl i
   @Override
   protected ResultSetTrackerImpl wrapResultSet(ResultSet results) throws SQLException {
     return ConnectionTrackerImpl.getIfAbsent(trackedResultSets, results,
-      () -> (ResultSetTrackerImpl)super.wrapResultSet(results),
-      ResultSetTrackerImpl::getWrapped
+        () -> (ResultSetTrackerImpl) super.wrapResultSet(results),
+        ResultSetTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected ParameterMetaDataTrackerImpl wrapParameterMetaData(ParameterMetaData metaData) {
     return ConnectionTrackerImpl.getIfAbsent(trackedParameterMetaDatas, metaData,
-      () -> (ParameterMetaDataTrackerImpl)super.wrapParameterMetaData(metaData),
-      ParameterMetaDataTrackerImpl::getWrapped
+        () -> (ParameterMetaDataTrackerImpl) super.wrapParameterMetaData(metaData),
+        ParameterMetaDataTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected ResultSetMetaDataTrackerImpl wrapResultSetMetaData(ResultSetMetaData metaData) {
     return ConnectionTrackerImpl.getIfAbsent(trackedResultSetMetaDatas, metaData,
-      () -> (ResultSetMetaDataTrackerImpl)super.wrapResultSetMetaData(metaData),
-      ResultSetMetaDataTrackerImpl::getWrapped
+        () -> (ResultSetMetaDataTrackerImpl) super.wrapResultSetMetaData(metaData),
+        ResultSetMetaDataTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected ArrayTrackerImpl wrapArray(Array array) {
     return ConnectionTrackerImpl.getIfAbsent(trackedArrays, array,
-      () -> (ArrayTrackerImpl)super.wrapArray(array),
-      ArrayTrackerImpl::getWrapped
+        () -> (ArrayTrackerImpl) super.wrapArray(array),
+        ArrayTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected BlobTrackerImpl wrapBlob(Blob blob) {
     return ConnectionTrackerImpl.getIfAbsent(trackedBlobs, blob,
-      () -> (BlobTrackerImpl)super.wrapBlob(blob),
-      BlobTrackerImpl::getWrapped
+        () -> (BlobTrackerImpl) super.wrapBlob(blob),
+        BlobTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected ClobTrackerImpl wrapClob(Clob clob) {
     return ConnectionTrackerImpl.getIfAbsent(trackedClobs, clob,
-      () -> (ClobTrackerImpl)super.wrapClob(clob),
-      ClobTrackerImpl::getWrapped
+        () -> (ClobTrackerImpl) super.wrapClob(clob),
+        ClobTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected NClobTrackerImpl wrapNClob(NClob nclob) {
     return ConnectionTrackerImpl.getIfAbsent(trackedNClobs, nclob,
-      () -> (NClobTrackerImpl)super.wrapNClob(nclob),
-      NClobTrackerImpl::getWrapped
+        () -> (NClobTrackerImpl) super.wrapNClob(nclob),
+        NClobTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected ReaderTracker wrapReader(Reader in) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedReaders, in,
-      () -> (ReaderTracker)super.wrapReader(in),
-      ReaderTracker::getWrapped
+        trackedReaders, in,
+        () -> (ReaderTracker) super.wrapReader(in),
+        ReaderTracker::getWrapped
     );
   }
 
   @Override
   protected RefTrackerImpl wrapRef(Ref ref) {
     return ConnectionTrackerImpl.getIfAbsent(trackedRefs, ref,
-      () -> (RefTrackerImpl)super.wrapRef(ref),
-      RefTrackerImpl::getWrapped
+        () -> (RefTrackerImpl) super.wrapRef(ref),
+        RefTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected RowIdTrackerImpl wrapRowId(RowId rowId) {
     return ConnectionTrackerImpl.getIfAbsent(trackedRowIds, rowId,
-      () -> (RowIdTrackerImpl)super.wrapRowId(rowId),
-      RowIdTrackerImpl::getWrapped
+        () -> (RowIdTrackerImpl) super.wrapRowId(rowId),
+        RowIdTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected SQLXMLTrackerImpl wrapSQLXML(SQLXML sqlXml) {
     return ConnectionTrackerImpl.getIfAbsent(trackedSQLXMLs, sqlXml,
-      () -> (SQLXMLTrackerImpl)super.wrapSQLXML(sqlXml),
-      SQLXMLTrackerImpl::getWrapped
+        () -> (SQLXMLTrackerImpl) super.wrapSQLXML(sqlXml),
+        SQLXMLTrackerImpl::getWrapped
     );
   }
 

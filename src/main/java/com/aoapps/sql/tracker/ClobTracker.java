@@ -33,10 +33,10 @@ import java.sql.SQLException;
  * @author  AO Industries, Inc.
  */
 public interface ClobTracker extends ClobWrapper, OnCloseHandler,
-  TrackedInputStreams,
-  TrackedOutputStreams,
-  TrackedReaders,
-  TrackedWriters {
+    TrackedInputStreams,
+    TrackedOutputStreams,
+    TrackedReaders,
+    TrackedWriters {
 
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.free()}.

@@ -33,7 +33,7 @@ import java.sql.Statement;
  * @author  AO Industries, Inc.
  */
 public interface StatementTracker extends StatementWrapper, OnCloseHandler,
-  TrackedResultSets {
+    TrackedResultSets {
 
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.

@@ -33,8 +33,8 @@ import java.sql.SQLException;
  * @author  AO Industries, Inc.
  */
 public interface SQLDataTracker extends SQLDataWrapper, OnCloseHandler,
-  TrackedSQLInputs,
-  TrackedSQLOutputs {
+    TrackedSQLInputs,
+    TrackedSQLOutputs {
 
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.

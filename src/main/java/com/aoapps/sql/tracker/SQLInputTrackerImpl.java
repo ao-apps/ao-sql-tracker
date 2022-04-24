@@ -131,74 +131,74 @@ public class SQLInputTrackerImpl extends SQLInputWrapperImpl implements SQLInput
   @Override
   protected ArrayTrackerImpl wrapArray(Array array) {
     return ConnectionTrackerImpl.getIfAbsent(trackedArrays, array,
-      () -> (ArrayTrackerImpl)super.wrapArray(array),
-      ArrayTrackerImpl::getWrapped
+        () -> (ArrayTrackerImpl) super.wrapArray(array),
+        ArrayTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected BlobTrackerImpl wrapBlob(Blob blob) {
     return ConnectionTrackerImpl.getIfAbsent(trackedBlobs, blob,
-      () -> (BlobTrackerImpl)super.wrapBlob(blob),
-      BlobTrackerImpl::getWrapped
+        () -> (BlobTrackerImpl) super.wrapBlob(blob),
+        BlobTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected ClobTrackerImpl wrapClob(Clob clob) {
     return ConnectionTrackerImpl.getIfAbsent(trackedClobs, clob,
-      () -> (ClobTrackerImpl)super.wrapClob(clob),
-      ClobTrackerImpl::getWrapped
+        () -> (ClobTrackerImpl) super.wrapClob(clob),
+        ClobTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected InputStreamTracker wrapInputStream(InputStream in) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedInputStreams, in,
-      () -> (InputStreamTracker)super.wrapInputStream(in),
-      InputStreamTracker::getWrapped
+        trackedInputStreams, in,
+        () -> (InputStreamTracker) super.wrapInputStream(in),
+        InputStreamTracker::getWrapped
     );
   }
 
   @Override
   protected NClobTrackerImpl wrapNClob(NClob nclob) {
     return ConnectionTrackerImpl.getIfAbsent(trackedNClobs, nclob,
-      () -> (NClobTrackerImpl)super.wrapNClob(nclob),
-      NClobTrackerImpl::getWrapped
+        () -> (NClobTrackerImpl) super.wrapNClob(nclob),
+        NClobTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected ReaderTracker wrapReader(Reader in) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedReaders, in,
-      () -> (ReaderTracker)super.wrapReader(in),
-      ReaderTracker::getWrapped
+        trackedReaders, in,
+        () -> (ReaderTracker) super.wrapReader(in),
+        ReaderTracker::getWrapped
     );
   }
 
   @Override
   protected RefTrackerImpl wrapRef(Ref ref) {
     return ConnectionTrackerImpl.getIfAbsent(trackedRefs, ref,
-      () -> (RefTrackerImpl)super.wrapRef(ref),
-      RefTrackerImpl::getWrapped
+        () -> (RefTrackerImpl) super.wrapRef(ref),
+        RefTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected RowIdTrackerImpl wrapRowId(RowId rowId) {
     return ConnectionTrackerImpl.getIfAbsent(trackedRowIds, rowId,
-      () -> (RowIdTrackerImpl)super.wrapRowId(rowId),
-      RowIdTrackerImpl::getWrapped
+        () -> (RowIdTrackerImpl) super.wrapRowId(rowId),
+        RowIdTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected SQLXMLTrackerImpl wrapSQLXML(SQLXML sqlXml) {
     return ConnectionTrackerImpl.getIfAbsent(trackedSQLXMLs, sqlXml,
-      () -> (SQLXMLTrackerImpl)super.wrapSQLXML(sqlXml),
-      SQLXMLTrackerImpl::getWrapped
+        () -> (SQLXMLTrackerImpl) super.wrapSQLXML(sqlXml),
+        SQLXMLTrackerImpl::getWrapped
     );
   }
 

@@ -65,8 +65,8 @@ public class StatementTrackerImpl extends StatementWrapperImpl implements Statem
   @Override
   protected ResultSetTrackerImpl wrapResultSet(ResultSet results) throws SQLException {
     return ConnectionTrackerImpl.getIfAbsent(trackedResultSets, results,
-      () -> (ResultSetTrackerImpl)super.wrapResultSet(results),
-      ResultSetTrackerImpl::getWrapped
+        () -> (ResultSetTrackerImpl) super.wrapResultSet(results),
+        ResultSetTrackerImpl::getWrapped
     );
   }
 
@@ -79,8 +79,8 @@ public class StatementTrackerImpl extends StatementWrapperImpl implements Statem
     Throwable t0 = ConnectionTrackerImpl.clearRunAndCatch(onCloseHandlers);
     // Close tracked objects
     t0 = ConnectionTrackerImpl.clearCloseAndCatch(t0,
-      // Statement
-      trackedResultSets
+        // Statement
+        trackedResultSets
     );
     try {
       super.close();

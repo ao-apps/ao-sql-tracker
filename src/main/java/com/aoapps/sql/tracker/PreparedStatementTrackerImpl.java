@@ -85,24 +85,24 @@ public class PreparedStatementTrackerImpl extends PreparedStatementWrapperImpl i
   @Override
   protected ResultSetTrackerImpl wrapResultSet(ResultSet results) throws SQLException {
     return ConnectionTrackerImpl.getIfAbsent(trackedResultSets, results,
-      () -> (ResultSetTrackerImpl)super.wrapResultSet(results),
-      ResultSetTrackerImpl::getWrapped
+        () -> (ResultSetTrackerImpl) super.wrapResultSet(results),
+        ResultSetTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected ParameterMetaDataTrackerImpl wrapParameterMetaData(ParameterMetaData metaData) {
     return ConnectionTrackerImpl.getIfAbsent(trackedParameterMetaDatas, metaData,
-      () -> (ParameterMetaDataTrackerImpl)super.wrapParameterMetaData(metaData),
-      ParameterMetaDataTrackerImpl::getWrapped
+        () -> (ParameterMetaDataTrackerImpl) super.wrapParameterMetaData(metaData),
+        ParameterMetaDataTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected ResultSetMetaDataTrackerImpl wrapResultSetMetaData(ResultSetMetaData metaData) {
     return ConnectionTrackerImpl.getIfAbsent(trackedResultSetMetaDatas, metaData,
-      () -> (ResultSetMetaDataTrackerImpl)super.wrapResultSetMetaData(metaData),
-      ResultSetMetaDataTrackerImpl::getWrapped
+        () -> (ResultSetMetaDataTrackerImpl) super.wrapResultSetMetaData(metaData),
+        ResultSetMetaDataTrackerImpl::getWrapped
     );
   }
 

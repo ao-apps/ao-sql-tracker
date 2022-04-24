@@ -64,8 +64,8 @@ public class DatabaseMetaDataTrackerImpl extends DatabaseMetaDataWrapperImpl imp
   @Override
   protected ResultSetTrackerImpl wrapResultSet(ResultSet results) throws SQLException {
     return ConnectionTrackerImpl.getIfAbsent(trackedResultSets, results,
-      () -> (ResultSetTrackerImpl)super.wrapResultSet(results),
-      ResultSetTrackerImpl::getWrapped
+        () -> (ResultSetTrackerImpl) super.wrapResultSet(results),
+        ResultSetTrackerImpl::getWrapped
     );
   }
 

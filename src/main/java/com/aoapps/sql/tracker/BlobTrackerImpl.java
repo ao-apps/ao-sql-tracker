@@ -75,18 +75,18 @@ public class BlobTrackerImpl extends BlobWrapperImpl implements BlobTracker {
   @Override
   protected InputStreamTracker wrapInputStream(InputStream in) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedInputStreams, in,
-      () -> (InputStreamTracker)super.wrapInputStream(in),
-      InputStreamTracker::getWrapped
+        trackedInputStreams, in,
+        () -> (InputStreamTracker) super.wrapInputStream(in),
+        InputStreamTracker::getWrapped
     );
   }
 
   @Override
   protected OutputStreamTracker wrapOutputStream(OutputStream out) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedOutputStreams, out,
-      () -> (OutputStreamTracker)super.wrapOutputStream(out),
-      OutputStreamTracker::getWrapped
+        trackedOutputStreams, out,
+        () -> (OutputStreamTracker) super.wrapOutputStream(out),
+        OutputStreamTracker::getWrapped
     );
   }
 

@@ -33,7 +33,7 @@ import java.sql.SQLException;
  * @author  AO Industries, Inc.
  */
 public interface ArrayTracker extends ArrayWrapper, OnCloseHandler,
-  TrackedResultSets {
+    TrackedResultSets {
 
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.free()}.

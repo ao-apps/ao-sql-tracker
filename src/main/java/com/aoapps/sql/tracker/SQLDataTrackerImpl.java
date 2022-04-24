@@ -77,18 +77,18 @@ public class SQLDataTrackerImpl extends SQLDataWrapperImpl implements SQLDataTra
   @Override
   protected SQLInputWrapperImpl wrapSQLInput(SQLInput sqlInput) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedSQLInputs, sqlInput,
-      () -> (SQLInputTrackerImpl)super.wrapSQLInput(sqlInput),
-      SQLInputTrackerImpl::getWrapped
+        trackedSQLInputs, sqlInput,
+        () -> (SQLInputTrackerImpl) super.wrapSQLInput(sqlInput),
+        SQLInputTrackerImpl::getWrapped
     );
   }
 
   @Override
   protected SQLOutputWrapperImpl wrapSQLOutput(SQLOutput sqlOutput) {
     return ConnectionTrackerImpl.getIfAbsent(
-      trackedSQLOutputs, sqlOutput,
-      () -> (SQLOutputTrackerImpl)super.wrapSQLOutput(sqlOutput),
-      SQLOutputTrackerImpl::getWrapped
+        trackedSQLOutputs, sqlOutput,
+        () -> (SQLOutputTrackerImpl) super.wrapSQLOutput(sqlOutput),
+        SQLOutputTrackerImpl::getWrapped
     );
   }
 

@@ -33,8 +33,8 @@ import java.sql.SQLException;
  * @author  AO Industries, Inc.
  */
 public interface BlobTracker extends BlobWrapper, OnCloseHandler,
-  TrackedInputStreams,
-  TrackedOutputStreams {
+    TrackedInputStreams,
+    TrackedOutputStreams {
 
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.free()}.
