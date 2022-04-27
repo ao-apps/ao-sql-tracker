@@ -368,7 +368,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
           V gotTracker = getTracker.call();
           tracker = map.computeIfAbsent(
               keyFunction.apply(gotTracker),
-              key -> {
+              (K key) -> {
                 gotTracker.addOnClose(() -> map.remove(key, gotTracker));
                 return gotTracker;
               }
@@ -402,7 +402,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
   ) {
     return map.computeIfAbsent(
         wrapped,
-        k -> {
+        (K k) -> {
           assert k == wrapped;
           V tracker = newTracker.apply(thisTracker, k);
           tracker.addOnClose(() -> map.remove(k, tracker));
@@ -738,7 +738,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
           iter.remove();
           toRelease.add(value);
         } else {
-          matched = (value == savepointTracker);
+          matched = value == savepointTracker;
         }
       }
     }
@@ -778,7 +778,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
       while (iter.hasNext()) {
         SavepointTrackerImpl value = iter.next();
         if (!matched) {
-          matched = (value == savepointTracker);
+          matched = value == savepointTracker;
         }
         if (matched) {
           iter.remove();
