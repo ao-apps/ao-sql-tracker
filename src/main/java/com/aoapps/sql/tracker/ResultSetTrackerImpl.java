@@ -23,6 +23,8 @@
 
 package com.aoapps.sql.tracker;
 
+import static java.util.Collections.synchronizedMap;
+
 import com.aoapps.lang.Throwables;
 import com.aoapps.sql.wrapper.ResultSetWrapperImpl;
 import com.aoapps.sql.wrapper.StatementWrapperImpl;
@@ -40,7 +42,6 @@ import java.sql.SQLException;
 import java.sql.SQLXML;
 import java.util.ArrayList;
 import java.util.Collections;
-import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -220,6 +221,8 @@ public class ResultSetTrackerImpl extends ResultSetWrapperImpl implements Result
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ArrayTrackerImpl#close()
    * @see  BlobTrackerImpl#close()
    * @see  ClobTrackerImpl#close()

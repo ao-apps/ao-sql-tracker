@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.sql.SQLXML;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain SQLXML SQL XMLs} that have not yet been freed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedSQLXMLs {
 
   /**
-   * Gets all the SQL XMLs that have not yet been freed.
+   * Gets all the {@linkplain SQLXML SQL XMLs} that have not yet been freed.
    *
    * @return  The mapping from wrapped SQL XML to tracker without any defensive copy.
    *

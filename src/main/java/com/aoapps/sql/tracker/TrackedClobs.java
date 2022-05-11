@@ -27,10 +27,16 @@ import java.sql.Clob;
 import java.sql.NClob;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain Clob clobs} that have not yet been freed.
+ * This only contains {@link Clob}, please see other method for {@link NClob}.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedClobs {
 
   /**
-   * Gets all the clobs that have not yet been freed.
+   * Gets all the {@linkplain Clob clobs} that have not yet been freed.
    * This only contains {@link Clob}, please see other method for {@link NClob}.
    *
    * @return  The mapping from wrapped clob to tracker without any defensive copy.

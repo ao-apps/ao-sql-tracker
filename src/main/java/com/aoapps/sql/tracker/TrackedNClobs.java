@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.sql.NClob;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain NClob nclobs} that have not yet been freed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedNClobs {
 
   /**
-   * Gets all the nclobs that have not yet been freed.
+   * Gets all the {@linkplain NClob nclobs} that have not yet been freed.
    *
    * @return  The mapping from wrapped nclob to tracker without any defensive copy.
    *

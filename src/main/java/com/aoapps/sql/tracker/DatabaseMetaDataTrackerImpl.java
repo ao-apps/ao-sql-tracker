@@ -23,6 +23,8 @@
 
 package com.aoapps.sql.tracker;
 
+import static java.util.Collections.synchronizedMap;
+
 import com.aoapps.lang.Throwables;
 import com.aoapps.sql.wrapper.DatabaseMetaDataWrapperImpl;
 import java.sql.DatabaseMetaData;
@@ -30,7 +32,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,8 @@ public class DatabaseMetaDataTrackerImpl extends DatabaseMetaDataWrapperImpl imp
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ResultSetTrackerImpl#close()
    */
   @Override

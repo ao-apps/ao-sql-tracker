@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.sql.CallableStatement;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain CallableStatement callable statements} that have not yet been closed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedCallableStatements {
 
   /**
-   * Gets all the callable statements that have not yet been closed.
+   * Gets all the {@linkplain CallableStatement callable statements} that have not yet been closed.
    *
    * @return  The mapping from wrapped callable statement to tracker without any defensive copy.
    *

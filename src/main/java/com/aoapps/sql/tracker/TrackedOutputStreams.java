@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.io.OutputStream;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain OutputStream output streams} that have not yet been closed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedOutputStreams {
 
   /**
-   * Gets all the output streams that have not yet been closed.
+   * Gets all the {@linkplain OutputStream output streams} that have not yet been closed.
    *
    * @return  The mapping from wrapped output stream to tracker without any defensive copy.
    *

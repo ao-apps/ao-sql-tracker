@@ -27,10 +27,18 @@ import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain ParameterMetaData meta data} that have not yet been closed.
+ * Meta datas are assumed to be closed with their prepared
+ * statement.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedParameterMetaDatas {
 
   /**
-   * Gets all the meta data that have not yet been closed.  Meta datas are assumed to be closed with their prepared
+   * Gets all the {@linkplain ParameterMetaData meta data} that have not yet been closed.
+   * Meta datas are assumed to be closed with their prepared
    * statement.
    *
    * @return  The mapping from wrapped meta data to tracker without any defensive copy.

@@ -23,6 +23,8 @@
 
 package com.aoapps.sql.tracker;
 
+import static java.util.Collections.synchronizedMap;
+
 import com.aoapps.lang.Throwables;
 import com.aoapps.sql.wrapper.PreparedStatementWrapperImpl;
 import java.sql.ParameterMetaData;
@@ -32,7 +34,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +108,8 @@ public class PreparedStatementTrackerImpl extends PreparedStatementWrapperImpl i
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ResultSetTrackerImpl#close()
    *
    * @see  ParameterMetaDataTrackerImpl#close()

@@ -23,6 +23,8 @@
 
 package com.aoapps.sql.tracker;
 
+import static java.util.Collections.synchronizedMap;
+
 import com.aoapps.lang.Throwables;
 import com.aoapps.sql.wrapper.DriverWrapper;
 import java.sql.Connection;
@@ -30,7 +32,6 @@ import java.sql.Driver;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.ArrayList;
 import java.util.Collections;
-import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;

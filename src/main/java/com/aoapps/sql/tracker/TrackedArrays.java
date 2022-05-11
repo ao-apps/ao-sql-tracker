@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.sql.Array;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain Array arrays} that have not yet been freed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedArrays {
 
   /**
-   * Gets all the arrays that have not yet been freed.
+   * Gets all the {@linkplain Array arrays} that have not yet been freed.
    *
    * @return  The mapping from wrapped array to tracker without any defensive copy.
    *

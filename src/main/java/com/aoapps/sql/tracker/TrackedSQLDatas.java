@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.sql.SQLData;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain SQLData SQL datas} that have not yet been closed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedSQLDatas {
 
   /**
-   * Gets all the SQL datas that have not yet been closed.
+   * Gets all the {@linkplain SQLData SQL datas} that have not yet been closed.
    *
    * @return  The mapping from wrapped SQL data to tracker without any defensive copy.
    *

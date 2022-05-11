@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.io.Writer;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain Writer writers} that have not yet been closed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedWriters {
 
   /**
-   * Gets all the writers that have not yet been closed.
+   * Gets all the {@linkplain Writer writers} that have not yet been closed.
    *
    * @return  The mapping from wrapped writer to tracker without any defensive copy.
    *

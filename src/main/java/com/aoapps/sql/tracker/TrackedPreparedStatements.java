@@ -27,10 +27,16 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain PreparedStatement prepared statements} that have not yet been closed.
+ * This only contains {@link PreparedStatement}, please see other method for {@link CallableStatement}.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedPreparedStatements {
 
   /**
-   * Gets all the prepared statements that have not yet been closed.
+   * Gets all the {@linkplain PreparedStatement prepared statements} that have not yet been closed.
    * This only contains {@link PreparedStatement}, please see other method for {@link CallableStatement}.
    *
    * @return  The mapping from wrapped prepared statement to tracker without any defensive copy.

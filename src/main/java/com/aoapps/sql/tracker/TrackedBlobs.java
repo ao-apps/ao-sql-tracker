@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.sql.Blob;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain Blob blobs} that have not yet been freed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedBlobs {
 
   /**
-   * Gets all the blobs that have not yet been freed.
+   * Gets all the {@linkplain Blob blobs} that have not yet been freed.
    *
    * @return  The mapping from wrapped blob to tracker without any defensive copy.
    *

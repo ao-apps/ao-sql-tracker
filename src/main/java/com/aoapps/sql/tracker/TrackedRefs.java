@@ -27,10 +27,17 @@ import java.sql.Connection;
 import java.sql.Ref;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain Ref refs} that have not yet been closed.
+ * Refs are assumed to be closed with their connection.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedRefs {
 
   /**
-   * Gets all the refs that have not yet been closed.  Refs are assumed to be closed with their connection.
+   * Gets all the {@linkplain Ref refs} that have not yet been closed.
+   * Refs are assumed to be closed with their connection.
    *
    * @return  The mapping from wrapped ref to tracker without any defensive copy.
    *

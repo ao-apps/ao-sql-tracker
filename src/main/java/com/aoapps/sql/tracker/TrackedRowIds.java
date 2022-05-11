@@ -27,10 +27,17 @@ import java.sql.Connection;
 import java.sql.RowId;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain RowId row IDs} that have not yet been closed.
+ * Row IDs are assumed to be closed with their connection.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedRowIds {
 
   /**
-   * Gets all the row IDs that have not yet been closed.  Row IDs are assumed to be closed with their connection.
+   * Gets all the {@linkplain RowId row IDs} that have not yet been closed.
+   * Row IDs are assumed to be closed with their connection.
    *
    * @return  The mapping from wrapped row ID to tracker without any defensive copy.
    *

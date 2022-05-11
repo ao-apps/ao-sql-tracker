@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.io.InputStream;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain InputStream input streams} that have not yet been closed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedInputStreams {
 
   /**
-   * Gets all the input streams that have not yet been closed.
+   * Gets all the {@linkplain InputStream input streams} that have not yet been closed.
    *
    * @return  The mapping from wrapped input stream to tracker without any defensive copy.
    *

@@ -27,10 +27,17 @@ import java.sql.Connection;
 import java.sql.Struct;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain Struct structs} that have not yet been closed.
+ * Structs are assumed to be closed with their connection.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedStructs {
 
   /**
-   * Gets all the structs that have not yet been closed.  Structs are assumed to be closed with their connection.
+   * Gets all the {@linkplain Struct structs} that have not yet been closed.
+   * Structs are assumed to be closed with their connection.
    *
    * @return  The mapping from wrapped struct to tracker without any defensive copy.
    *

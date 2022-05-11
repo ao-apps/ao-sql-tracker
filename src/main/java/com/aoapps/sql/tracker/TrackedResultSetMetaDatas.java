@@ -27,10 +27,17 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain ResultSetMetaData meta data} that have not yet been closed.
+ * Meta datas are assumed to be closed with their result set.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedResultSetMetaDatas {
 
   /**
-   * Gets all the meta data that have not yet been closed.  Meta datas are assumed to be closed with their result set.
+   * Gets all the {@linkplain ResultSetMetaData meta data} that have not yet been closed.
+   * Meta datas are assumed to be closed with their result set.
    *
    * @return  The mapping from wrapped meta data to tracker without any defensive copy.
    *

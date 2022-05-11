@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.sql.ResultSet;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain ResultSet result sets} that have not yet been closed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedResultSets {
 
   /**
-   * Gets all the result sets that have not yet been closed.
+   * Gets all the {@linkplain ResultSet result sets} that have not yet been closed.
    *
    * @return  The mapping from wrapped result set to tracker without any defensive copy.
    *

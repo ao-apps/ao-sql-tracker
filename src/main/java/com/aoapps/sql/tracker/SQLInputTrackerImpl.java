@@ -23,6 +23,8 @@
 
 package com.aoapps.sql.tracker;
 
+import static java.util.Collections.synchronizedMap;
+
 import com.aoapps.lang.Throwables;
 import com.aoapps.sql.wrapper.SQLInputWrapperImpl;
 import java.io.InputStream;
@@ -38,7 +40,6 @@ import java.sql.SQLInput;
 import java.sql.SQLXML;
 import java.util.ArrayList;
 import java.util.Collections;
-import static java.util.Collections.synchronizedMap;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,6 +204,8 @@ public class SQLInputTrackerImpl extends SQLInputWrapperImpl implements SQLInput
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see  ArrayTrackerImpl#close()
    * @see  BlobTrackerImpl#close()
    * @see  ClobTrackerImpl#close()

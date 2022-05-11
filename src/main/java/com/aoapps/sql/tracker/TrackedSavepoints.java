@@ -27,10 +27,15 @@ import java.sql.Connection;
 import java.sql.Savepoint;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain Savepoint savepoints} that have not yet been released.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedSavepoints {
 
   /**
-   * Gets all the savepoints that have not yet been released.
+   * Gets all the {@linkplain Savepoint savepoints} that have not yet been released.
    *
    * @return  The mapping from wrapped savepoint to tracker without any defensive copy.
    *

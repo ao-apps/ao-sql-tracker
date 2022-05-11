@@ -26,10 +26,15 @@ package com.aoapps.sql.tracker;
 import java.io.Reader;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain Reader readers} that have not yet been closed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedReaders {
 
   /**
-   * Gets all the readers that have not yet been closed.
+   * Gets all the {@linkplain Reader readers} that have not yet been closed.
    *
    * @return  The mapping from wrapped reader to tracker without any defensive copy.
    *

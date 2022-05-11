@@ -27,10 +27,17 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain DatabaseMetaData meta data} that have not yet been closed.
+ * Meta datas are assumed to be closed with their connection.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedDatabaseMetaDatas {
 
   /**
-   * Gets all the meta data that have not yet been closed.  Meta datas are assumed to be closed with their connection.
+   * Gets all the {@linkplain DatabaseMetaData meta data} that have not yet been closed.
+   * Meta datas are assumed to be closed with their connection.
    *
    * @return  The mapping from wrapped meta data to tracker without any defensive copy.
    *

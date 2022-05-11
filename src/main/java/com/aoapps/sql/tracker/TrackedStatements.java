@@ -28,10 +28,17 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain Statement statements} that have not yet been closed.
+ * This only contains {@link Statement}, please see other methods for {@link PreparedStatement} and
+ * {@link CallableStatement}.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedStatements {
 
   /**
-   * Gets all the statements that have not yet been closed.
+   * Gets all the {@linkplain Statement statements} that have not yet been closed.
    * This only contains {@link Statement}, please see other methods for {@link PreparedStatement} and
    * {@link CallableStatement}.
    *

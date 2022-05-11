@@ -27,10 +27,15 @@ import com.aoapps.sql.wrapper.SQLDataWrapperImpl;
 import java.sql.SQLInput;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain SQLInput SQL inputs} that have not yet been closed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedSQLInputs {
 
   /**
-   * Gets all the SQL inputs that have not yet been closed.
+   * Gets all the {@linkplain SQLInput SQL inputs} that have not yet been closed.
    *
    * @return  The mapping from wrapped SQL input to tracker without any defensive copy.
    *

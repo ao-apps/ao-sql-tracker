@@ -27,10 +27,15 @@ import com.aoapps.sql.wrapper.SQLDataWrapperImpl;
 import java.sql.SQLOutput;
 import java.util.Map;
 
+/**
+ * Gets all the {@linkplain SQLOutput SQL outputs} that have not yet been closed.
+ *
+ * @author  AO Industries, Inc.
+ */
 public interface TrackedSQLOutputs {
 
   /**
-   * Gets all the SQL outputs that have not yet been closed.
+   * Gets all the {@linkplain SQLOutput SQL outputs} that have not yet been closed.
    *
    * @return  The mapping from wrapped SQL output to tracker without any defensive copy.
    *
