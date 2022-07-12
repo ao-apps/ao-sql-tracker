@@ -30,16 +30,40 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link SQLOutput} for unclosed or unfreed objects.
  *
  * @author  AO Industries, Inc.
  */
-public class SQLOutputTrackerImpl extends SQLOutputWrapperImpl implements SQLOutputTracker {
+public class SQLOutputTrackerImpl extends SQLOutputWrapperImpl
+    implements SQLOutputTracker, AllocationStacktraceProvider {
 
+  private static final Logger logger = Logger.getLogger(SQLOutputTrackerImpl.class.getName());
+
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link SQLOutput} tracker.
+   */
   public SQLOutputTrackerImpl(ConnectionTrackerImpl connectionTracker, SQLOutput wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

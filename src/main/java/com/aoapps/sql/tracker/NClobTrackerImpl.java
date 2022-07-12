@@ -45,12 +45,33 @@ import java.util.logging.Logger;
  *
  * @author  AO Industries, Inc.
  */
-public class NClobTrackerImpl extends NClobWrapperImpl implements NClobTracker {
+public class NClobTrackerImpl extends NClobWrapperImpl
+    implements NClobTracker, AllocationStacktraceProvider {
 
   private static final Logger logger = Logger.getLogger(NClobTrackerImpl.class.getName());
 
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link NClob} tracker.
+   */
   public NClobTrackerImpl(ConnectionTrackerImpl connectionTracker, NClob wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

@@ -30,16 +30,40 @@ import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link Struct} for unclosed or unfreed objects.
  *
  * @author  AO Industries, Inc.
  */
-public class StructTrackerImpl extends StructWrapperImpl implements StructTracker {
+public class StructTrackerImpl extends StructWrapperImpl
+    implements StructTracker, AllocationStacktraceProvider {
 
+  private static final Logger logger = Logger.getLogger(StructTrackerImpl.class.getName());
+
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link Struct} tracker.
+   */
   public StructTrackerImpl(ConnectionTrackerImpl connectionTracker, Struct wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

@@ -36,16 +36,40 @@ import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Tracks an {@link Array} for unclosed or unfreed objects.
  *
  * @author  AO Industries, Inc.
  */
-public class ArrayTrackerImpl extends ArrayWrapperImpl implements ArrayTracker {
+public class ArrayTrackerImpl extends ArrayWrapperImpl
+    implements ArrayTracker, AllocationStacktraceProvider {
 
+  private static final Logger logger = Logger.getLogger(ArrayTrackerImpl.class.getName());
+
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link Array} tracker.
+   */
   public ArrayTrackerImpl(ConnectionTrackerImpl connectionTracker, StatementWrapperImpl stmtWrapper, Array wrapped) {
     super(connectionTracker, stmtWrapper, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

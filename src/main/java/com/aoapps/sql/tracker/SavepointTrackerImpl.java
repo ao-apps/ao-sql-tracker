@@ -30,16 +30,40 @@ import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link Savepoint} for unclosed or unfreed objects.
  *
  * @author  AO Industries, Inc.
  */
-public class SavepointTrackerImpl extends SavepointWrapperImpl implements SavepointTracker {
+public class SavepointTrackerImpl extends SavepointWrapperImpl
+    implements SavepointTracker, AllocationStacktraceProvider {
 
+  private static final Logger logger = Logger.getLogger(SavepointTrackerImpl.class.getName());
+
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link Savepoint} tracker.
+   */
   public SavepointTrackerImpl(ConnectionTrackerImpl connectionTracker, Savepoint wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

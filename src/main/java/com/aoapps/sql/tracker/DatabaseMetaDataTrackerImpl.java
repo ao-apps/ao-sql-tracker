@@ -35,16 +35,40 @@ import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link DatabaseMetaData} for unclosed or unfreed objects.
  *
  * @author  AO Industries, Inc.
  */
-public class DatabaseMetaDataTrackerImpl extends DatabaseMetaDataWrapperImpl implements DatabaseMetaDataTracker {
+public class DatabaseMetaDataTrackerImpl extends DatabaseMetaDataWrapperImpl
+    implements DatabaseMetaDataTracker, AllocationStacktraceProvider {
 
+  private static final Logger logger = Logger.getLogger(DatabaseMetaDataTrackerImpl.class.getName());
+
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link DatabaseMetaData} tracker.
+   */
   public DatabaseMetaDataTrackerImpl(ConnectionTrackerImpl connectionTracker, DatabaseMetaData wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

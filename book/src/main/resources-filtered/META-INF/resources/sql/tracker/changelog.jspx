@@ -37,7 +37,7 @@ along with ao-sql-tracker.  If not, see <https://www.gnu.org/licenses/>.
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2020-11-02T21:26:13-06:00"
-    dateModified="2021-07-20T00:40:57-05:00"
+    dateModified="2022-07-11T16:54:53-05:00"
   >
     <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
       <changelog:release
@@ -47,7 +47,11 @@ along with ao-sql-tracker.  If not, see <https://www.gnu.org/licenses/>.
         artifactId="@{documented.artifactId}"
         repository="@{nexusUrl}content/repositories/snapshots/"
         scmUrl="@{project.scm.url}"
-      />
+      >
+        <ul>
+          <li>Log stack traces for unclosed/unfreed resources at logging level <code>FINER</code>.</li>
+        </ul>
+      </changelog:release>
     </c:if>
 
     <changelog:release

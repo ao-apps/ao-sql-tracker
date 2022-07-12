@@ -30,16 +30,40 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link Writer} for unclosed or unfreed objects.
  *
  * @author  AO Industries, Inc.
  */
-public class WriterTracker extends WriterWrapper implements OnCloseHandler {
+public class WriterTracker extends WriterWrapper
+    implements OnCloseHandler, AllocationStacktraceProvider {
 
+  private static final Logger logger = Logger.getLogger(WriterTracker.class.getName());
+
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link Writer} tracker.
+   */
   public WriterTracker(ConnectionTrackerImpl connectionTracker, Writer wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

@@ -43,12 +43,33 @@ import java.util.logging.Logger;
  *
  * @author  AO Industries, Inc.
  */
-public class BlobTrackerImpl extends BlobWrapperImpl implements BlobTracker {
+public class BlobTrackerImpl extends BlobWrapperImpl
+    implements BlobTracker, AllocationStacktraceProvider {
 
   private static final Logger logger = Logger.getLogger(BlobTrackerImpl.class.getName());
 
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link Blob} tracker.
+   */
   public BlobTrackerImpl(ConnectionTrackerImpl connectionTracker, Blob wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

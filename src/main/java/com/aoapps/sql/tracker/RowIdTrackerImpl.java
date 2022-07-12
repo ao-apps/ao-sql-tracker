@@ -30,16 +30,40 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link RowId} for unclosed or unfreed objects.
  *
  * @author  AO Industries, Inc.
  */
-public class RowIdTrackerImpl extends RowIdWrapperImpl implements RowIdTracker {
+public class RowIdTrackerImpl extends RowIdWrapperImpl
+    implements RowIdTracker, AllocationStacktraceProvider {
 
+  private static final Logger logger = Logger.getLogger(RowIdTrackerImpl.class.getName());
+
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link RowId} tracker.
+   */
   public RowIdTrackerImpl(ConnectionTrackerImpl connectionTracker, RowId wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

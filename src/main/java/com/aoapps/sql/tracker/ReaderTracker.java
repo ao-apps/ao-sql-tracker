@@ -30,16 +30,40 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Tracks a {@link Reader} for unclosed or unfreed objects.
  *
  * @author  AO Industries, Inc.
  */
-public class ReaderTracker extends ReaderWrapper implements OnCloseHandler {
+public class ReaderTracker extends ReaderWrapper
+    implements OnCloseHandler, AllocationStacktraceProvider {
 
+  private static final Logger logger = Logger.getLogger(ReaderTracker.class.getName());
+
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link Reader} tracker.
+   */
   public ReaderTracker(ConnectionTrackerImpl connectionTracker, Reader wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

@@ -30,16 +30,40 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Tracks an {@link InputStream} for unclosed or unfreed objects.
  *
  * @author  AO Industries, Inc.
  */
-public class InputStreamTracker extends InputStreamWrapper implements OnCloseHandler {
+public class InputStreamTracker extends InputStreamWrapper
+    implements OnCloseHandler, AllocationStacktraceProvider {
 
+  private static final Logger logger = Logger.getLogger(InputStreamTracker.class.getName());
+
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link InputStream} tracker.
+   */
   public InputStreamTracker(ConnectionTrackerImpl connectionTracker, InputStream wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

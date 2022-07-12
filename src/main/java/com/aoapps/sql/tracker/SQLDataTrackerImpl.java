@@ -45,12 +45,33 @@ import java.util.logging.Logger;
  *
  * @author  AO Industries, Inc.
  */
-public class SQLDataTrackerImpl extends SQLDataWrapperImpl implements SQLDataTracker {
+public class SQLDataTrackerImpl extends SQLDataWrapperImpl
+    implements SQLDataTracker, AllocationStacktraceProvider {
 
   private static final Logger logger = Logger.getLogger(SQLDataTrackerImpl.class.getName());
 
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link SQLData} tracker.
+   */
   public SQLDataTrackerImpl(ConnectionTrackerImpl connectionTracker, SQLData wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

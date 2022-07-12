@@ -45,12 +45,33 @@ import java.util.logging.Logger;
  *
  * @author  AO Industries, Inc.
  */
-public class ClobTrackerImpl extends ClobWrapperImpl implements ClobTracker {
+public class ClobTrackerImpl extends ClobWrapperImpl
+    implements ClobTracker, AllocationStacktraceProvider {
 
   private static final Logger logger = Logger.getLogger(ClobTrackerImpl.class.getName());
 
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link Clob} tracker.
+   */
   public ClobTrackerImpl(ConnectionTrackerImpl connectionTracker, Clob wrapped) {
     super(connectionTracker, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());

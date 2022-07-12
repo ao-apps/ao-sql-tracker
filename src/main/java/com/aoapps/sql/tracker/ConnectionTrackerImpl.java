@@ -79,16 +79,45 @@ import java.util.logging.Logger;
  *
  * @author  AO Industries, Inc.
  */
-public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements ConnectionTracker {
+public class ConnectionTrackerImpl extends ConnectionWrapperImpl
+    implements ConnectionTracker, AllocationStacktraceProvider {
 
   private static final Logger logger = Logger.getLogger(ConnectionTrackerImpl.class.getName());
 
+  private final Exception allocationStacktrace;
+
+  /**
+   * Creates a new {@link Connection} tracker.
+   */
   public ConnectionTrackerImpl(DriverTracker driver, Connection wrapped) {
     super(driver, wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
   }
 
+  /**
+   * Creates a new {@link Connection} tracker.
+   */
   public ConnectionTrackerImpl(Connection wrapped) {
     super(wrapped);
+    if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+      allocationStacktrace = new Exception("Stack trace at allocation");
+    } else {
+      allocationStacktrace = null;
+    }
+  }
+
+  @Override
+  public Exception getAllocationStacktrace() {
+    return allocationStacktrace;
+  }
+
+  @Override
+  public Logger getAllocationLogger() {
+    return logger;
   }
 
   private final List<Runnable> onCloseHandlers = Collections.synchronizedList(new ArrayList<>());
@@ -277,8 +306,8 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
     return trackedWriters;
   }
 
-  static Throwable clearCloseAndCatch(Throwable t0, Map<?, ? extends AutoCloseable> map) {
-    List<AutoCloseable> closeMes;
+  static <C extends AutoCloseable & AllocationStacktraceProvider> Throwable clearCloseAndCatch(Throwable t0, Map<?, C> map) {
+    List<C> closeMes;
     synchronized (map) {
       closeMes = new ArrayList<>(map.values());
       map.clear();
@@ -291,16 +320,23 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
    * closing the tracked objects.
    * <p>
    * When non-zero number of objects to close, logs the number at level {@link Level#FINE} and a list of objects at
-   * level {@link Level#FINER}.
+   * level {@link AllocationStacktraceProvider#ALLOCATION_STACKTRACE_LOG_LEVEL}.
    * </p>
    *
    * @return  The result of all throwables merged via {@link Throwables#addSuppressed(java.lang.Throwable, java.lang.Throwable)}
    */
   @SuppressWarnings("unchecked")
-  static Throwable clearCloseAndCatch(Throwable t0, Logger logger, Class<?> sourceClass, String sourceMethod, String field, Map<?, ? extends AutoCloseable> tracked) {
-    List<AutoCloseable> closeMes;
+  static <C extends AutoCloseable & AllocationStacktraceProvider> Throwable clearCloseAndCatch(
+      Throwable t0,
+      Logger logger,
+      Class<?> sourceClass,
+      String sourceMethod,
+      String field,
+      Map<?, C> tracked
+  ) {
+    List<C> closeMes;
     synchronized (tracked) {
-      Collection<? extends AutoCloseable> values = tracked.values();
+      Collection<C> values = tracked.values();
       if (values.isEmpty()) {
         // Short-cut nothing to do
         return t0;
@@ -312,15 +348,27 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl implements Conn
     assert size > 0;
     if (logger.isLoggable(Level.FINE)) {
       String sourceClassName = sourceClass.getName();
-      logger.logp(Level.FINE, sourceClassName, sourceMethod, field + ": Closing " + size + " tracked " + (size == 1 ? "object" : "objects"));
-      if (logger.isLoggable(Level.FINER)) {
-        for (int i = 0; i < size; i++) {
-          AutoCloseable closeMe = closeMes.get(i);
-          logger.logp(Level.FINER, sourceClassName, sourceMethod, field + '[' + i + "]: Closing " + closeMe);
-          t0 = AutoCloseables.closeAndCatch(t0, closeMe);
-        }
+      assert ALLOCATION_STACKTRACE_LOG_LEVEL.intValue() < Level.FINE.intValue();
+      if (logger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+        logger.logp(
+            ALLOCATION_STACKTRACE_LOG_LEVEL, sourceClassName, sourceMethod,
+            field + ": Closing " + size + " tracked " + (size == 1 ? "object" : "objects"),
+            new Exception("Stack trace at closing"));
       } else {
-        t0 = AutoCloseables.closeAndCatch(t0, closeMes);
+        logger.logp(
+            Level.FINE, sourceClassName, sourceMethod,
+            field + ": Closing " + size + " tracked " + (size == 1 ? "object" : "objects"));
+      }
+      for (int i = 0; i < size; i++) {
+        C closeMe = closeMes.get(i);
+        Logger allocationLogger = closeMe.getAllocationLogger();
+        if (allocationLogger.isLoggable(ALLOCATION_STACKTRACE_LOG_LEVEL)) {
+          allocationLogger.logp(
+              ALLOCATION_STACKTRACE_LOG_LEVEL, sourceClassName, sourceMethod,
+              field + '[' + i + "]: Closing " + closeMe,
+              closeMe.getAllocationStacktrace());
+        }
+        t0 = AutoCloseables.closeAndCatch(t0, closeMe);
       }
     }
     return t0;
