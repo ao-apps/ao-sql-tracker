@@ -22,7 +22,7 @@ Tracks JDBC API for unclosed or unfreed objects.
 * [Project Home](https://oss.aoapps.com/sql/tracker/)
 * [Changelog](https://oss.aoapps.com/sql/tracker/changelog)
 * [API Docs](https://oss.aoapps.com/sql/tracker/apidocs/)
-* [Maven Central Repository](https://central.sonatype.com/search?namespace=com.aoapps&q=a%3Aao-sql-tracker)
+* [Maven Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-sql-tracker)
 * [GitHub](https://github.com/ao-apps/ao-sql-tracker)
 
 ## Contact Us
