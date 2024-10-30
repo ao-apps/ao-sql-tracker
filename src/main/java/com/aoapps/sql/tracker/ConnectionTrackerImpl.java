@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -318,10 +318,9 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
   /**
    * Closes all tracked objects in the given map.  Synchronizes on access to the map, and clears the map before
    * closing the tracked objects.
-   * <p>
-   * When non-zero number of objects to close, logs the number at level {@link Level#FINE} and a list of objects at
-   * level {@link AllocationStacktraceProvider#ALLOCATION_STACKTRACE_LOG_LEVEL}.
-   * </p>
+   *
+   * <p>When non-zero number of objects to close, logs the number at level {@link Level#FINE} and a list of objects at
+   * level {@link AllocationStacktraceProvider#ALLOCATION_STACKTRACE_LOG_LEVEL}.</p>
    *
    * @return  The result of all throwables merged via {@link Throwables#addSuppressed(java.lang.Throwable, java.lang.Throwable)}
    */
@@ -740,9 +739,8 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
 
   /**
    * {@inheritDoc}
-   * <p>
-   * This default implementation calls {@link #doClose()}.
-   * </p>
+   *
+   * <p>This default implementation calls {@link #doClose()}.</p>
    *
    * @see  #closeTracked(java.lang.Throwable, java.lang.String)
    * @see  #doClose()
@@ -869,9 +867,8 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
 
   /**
    * {@inheritDoc}
-   * <p>
-   * This default implementation calls {@link #doAbort(java.util.concurrent.Executor)}.
-   * </p>
+   *
+   * <p>This default implementation calls {@link #doAbort(java.util.concurrent.Executor)}.</p>
    *
    * @see  #clearTracking()
    * @see  #doAbort(java.util.concurrent.Executor)
@@ -893,9 +890,8 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
 
   /**
    * Performs the actual close, called once all onClose handlers completed and all tracked objects closed.
-   * <p>
-   * This default implementation calls {@code super.close()}
-   * </p>
+   *
+   * <p>This default implementation calls {@code super.close()}</p>
    *
    * @see  #close()
    */
@@ -905,9 +901,8 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
 
   /**
    * Performs the actual abort, called once all onClose handlers completed and all tracking cleared.
-   * <p>
-   * This default implementation calls {@code super.abort(executor)}
-   * </p>
+   *
+   * <p>This default implementation calls {@code super.abort(executor)}</p>
    *
    * @see  #abort(java.util.concurrent.Executor)
    */
