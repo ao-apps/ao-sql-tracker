@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2020, 2021, 2022, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -37,8 +37,7 @@ import java.util.logging.Logger;
  */
 public class Driver extends DriverTracker {
 
-  // Java 9: Driver.class.getPackageName()
-  private static final Logger PARENT_LOGGER = Logger.getLogger(Driver.class.getPackage().getName());
+  private static final Logger PARENT_LOGGER = Logger.getLogger(Driver.class.getPackageName());
 
   static {
     try {
