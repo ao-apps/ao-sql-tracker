@@ -37,7 +37,7 @@ public interface ParameterMetaDataTracker extends ParameterMetaDataWrapper, OnCl
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  ParameterMetaDataTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void close() throws SQLException;

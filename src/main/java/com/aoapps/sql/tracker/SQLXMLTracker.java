@@ -41,7 +41,7 @@ public interface SQLXMLTracker extends SQLXMLWrapper, OnCloseHandler,
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.free()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  SQLXMLTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void free() throws SQLException;

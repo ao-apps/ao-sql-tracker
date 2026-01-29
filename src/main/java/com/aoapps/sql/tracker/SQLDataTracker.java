@@ -39,7 +39,7 @@ public interface SQLDataTracker extends SQLDataWrapper, OnCloseHandler,
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  SQLDataTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void close() throws SQLException;

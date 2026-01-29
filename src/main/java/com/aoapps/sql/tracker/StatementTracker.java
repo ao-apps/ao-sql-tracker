@@ -38,7 +38,7 @@ public interface StatementTracker extends StatementWrapper, OnCloseHandler,
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  StatementTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void close() throws SQLException;

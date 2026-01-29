@@ -84,7 +84,7 @@ public abstract class DriverTracker extends DriverWrapper implements OnCloseHand
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.onDeregister()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  DriverTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   protected void onDeregister() {

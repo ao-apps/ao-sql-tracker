@@ -39,7 +39,7 @@ public interface BlobTracker extends BlobWrapper, OnCloseHandler,
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.free()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  BlobTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void free() throws SQLException;

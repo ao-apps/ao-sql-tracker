@@ -460,7 +460,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
   }
 
   /**
-   * See {@link #newIfAbsent(java.util.Map, java.lang.Object, java.lang.Object, java.util.function.BiFunction)}.
+   * See {@link ConnectionTrackerImpl#newIfAbsent(java.util.Map, java.lang.Object, java.lang.Object, java.util.function.BiFunction)}.
    */
   private <K, V extends OnCloseHandler> V newIfAbsent(
       Map<K, V> map,
@@ -472,7 +472,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
 
   /**
    * Closes / frees all tracked objects except savepoints, which are expected to be closed by a following
-   * {@link #rollback()}.
+   * {@link ConnectionTrackerImpl#rollback()}.
    */
   @SuppressWarnings("unchecked")
   protected Throwable closeTracked(Throwable t0, String sourceMethod) {
@@ -740,10 +740,10 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
   /**
    * {@inheritDoc}
    *
-   * <p>This default implementation calls {@link #doClose()}.</p>
+   * <p>This default implementation calls {@link ConnectionTrackerImpl#doClose()}.</p>
    *
-   * @see  #closeTracked(java.lang.Throwable, java.lang.String)
-   * @see  #doClose()
+   * @see  ConnectionTrackerImpl#closeTracked(java.lang.Throwable, java.lang.String)
+   * @see  ConnectionTrackerImpl#doClose()
    */
   @Override
   @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
@@ -868,10 +868,10 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
   /**
    * {@inheritDoc}
    *
-   * <p>This default implementation calls {@link #doAbort(java.util.concurrent.Executor)}.</p>
+   * <p>This default implementation calls {@link ConnectionTrackerImpl#doAbort(java.util.concurrent.Executor)}.</p>
    *
-   * @see  #clearTracking()
-   * @see  #doAbort(java.util.concurrent.Executor)
+   * @see  ConnectionTrackerImpl#clearTracking()
+   * @see  ConnectionTrackerImpl#doAbort(java.util.concurrent.Executor)
    */
   @Override
   @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})
@@ -893,7 +893,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
    *
    * <p>This default implementation calls {@code super.close()}</p>
    *
-   * @see  #close()
+   * @see  ConnectionTrackerImpl#close()
    */
   protected void doClose() throws SQLException {
     super.close();
@@ -904,7 +904,7 @@ public class ConnectionTrackerImpl extends ConnectionWrapperImpl
    *
    * <p>This default implementation calls {@code super.abort(executor)}</p>
    *
-   * @see  #abort(java.util.concurrent.Executor)
+   * @see  ConnectionTrackerImpl#abort(java.util.concurrent.Executor)
    */
   protected void doAbort(Executor executor) throws SQLException {
     super.abort(executor);

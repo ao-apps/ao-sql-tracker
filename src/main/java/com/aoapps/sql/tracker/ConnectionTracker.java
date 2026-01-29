@@ -81,7 +81,7 @@ public interface ConnectionTracker extends ConnectionWrapper, OnCloseHandler,
    * Calls onClose handlers, closes all tracked objects, rolls-back any transaction in-progress and puts back in
    * auto-commit mode, then calls {@link ConnectionTrackerImpl#doClose()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  ConnectionTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void close() throws SQLException;
@@ -103,7 +103,7 @@ public interface ConnectionTracker extends ConnectionWrapper, OnCloseHandler,
    * Trusts the underlying implementation of {@link Connection#abort(java.util.concurrent.Executor)} will free all
    * resources.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  ConnectionTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void abort(Executor executor) throws SQLException;

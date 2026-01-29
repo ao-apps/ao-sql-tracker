@@ -37,7 +37,7 @@ public interface SQLOutputTracker extends SQLOutputWrapper, OnCloseHandler {
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.close()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  SQLOutputTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void close() throws SQLException;

@@ -41,7 +41,7 @@ public interface ClobTracker extends ClobWrapper, OnCloseHandler,
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.free()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  ClobTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void free() throws SQLException;

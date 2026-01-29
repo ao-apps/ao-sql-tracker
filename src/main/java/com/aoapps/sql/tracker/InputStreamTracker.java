@@ -76,7 +76,7 @@ public class InputStreamTracker extends InputStreamWrapper
   /**
    * Calls onClose handlers then {@code super.close()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  InputStreamTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})

@@ -38,7 +38,7 @@ public interface ArrayTracker extends ArrayWrapper, OnCloseHandler,
   /**
    * Calls onClose handlers, closes all tracked objects, then calls {@code super.free()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  ArrayTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   void free() throws SQLException;

@@ -76,7 +76,7 @@ public class OutputStreamTracker extends OutputStreamWrapper
   /**
    * Calls onClose handlers then {@code super.close()}.
    *
-   * @see  #addOnClose(java.lang.Runnable)
+   * @see  OutputStreamTracker#addOnClose(java.lang.Runnable)
    */
   @Override
   @SuppressWarnings({"UseSpecificCatch", "TooBroadCatch"})

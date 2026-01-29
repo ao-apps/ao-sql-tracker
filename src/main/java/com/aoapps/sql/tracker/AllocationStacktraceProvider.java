@@ -27,7 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Tracks the stack trace at allocation time when logging at {@link #ALLOCATION_STACKTRACE_LOG_LEVEL} or higher.
+ * Tracks the stack trace at allocation time when logging at {@link AllocationStacktraceProvider#ALLOCATION_STACKTRACE_LOG_LEVEL} or higher.
  *
  * @author  AO Industries, Inc.
  */
