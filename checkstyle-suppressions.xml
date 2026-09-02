@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
-Copyright (C) 2022, 2023  AO Industries, Inc.
+Copyright (C) 2022, 2023, 2026  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -50,7 +50,7 @@ along with ao-sql-tracker.  If not, see <https://www.gnu.org/licenses/>.
     message="'Tracked(NClob|SQLData|SQLInput|SQLOutput|SQLXML)s'"
   />
   <suppress
-    checks="AbbreviationAsWordInName"
+    checks="(AbbreviationAsWordInName|GoogleMethodName)"
     files="[/\\]com[/\\]aoapps[/\\]sql[/\\]tracker[/\\]Tracked(NClob|SQLData|SQLInput|SQLOutput|SQLXML)s\.java"
     message="'getTracked(NClob|SQLData|SQLInput|SQLOutput|SQLXML)s'"
   />
