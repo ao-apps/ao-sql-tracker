@@ -1,6 +1,6 @@
 /*
  * ao-sql-tracker - Tracks JDBC API for unclosed or unfreed objects.
- * Copyright (C) 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2021, 2022, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -21,8 +21,6 @@
  * along with ao-sql-tracker.  If not, see <https://www.gnu.org/licenses/>.
  */
 module com.aoapps.sql.tracker {
-  exports com.aoapps.sql.tracker;
-  provides java.sql.Driver with com.aoapps.sql.tracker.Driver;
   // Direct
   requires com.aoapps.collections; // <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId>
   requires com.aoapps.collections.transformers; // <groupId>com.aoapps</groupId><artifactId>ao-collections-transformers</artifactId>
@@ -31,4 +29,8 @@ module com.aoapps.sql.tracker {
   // Java SE
   requires java.logging;
   requires java.sql;
+
+  exports com.aoapps.sql.tracker;
+
+  provides java.sql.Driver with com.aoapps.sql.tracker.Driver;
 }
